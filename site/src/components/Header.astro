@@ -57,7 +57,7 @@ const t = useTranslations(lang);
       btn.addEventListener('click', () => {
         const html = document.documentElement;
         const current = html.dataset.theme;
-        const next = current === 'light' ? undefined : 'light';
+        const next = current === 'dark' ? undefined : 'dark';
         if (next) {
           html.dataset.theme = next;
           localStorage.setItem('theme', next);
@@ -146,12 +146,12 @@ const t = useTranslations(lang);
     background: var(--bg-card);
   }
 
-  /* Theme toggle icon states: dark mode shows sun, light mode shows moon */
-  .icon-moon { display: none; }
-  .icon-sun { display: block; }
+  /* Theme toggle icon states: light (default) shows moon, dark shows sun */
+  .icon-sun { display: none; }
+  .icon-moon { display: block; }
 
-  :global([data-theme="light"]) .icon-sun { display: none; }
-  :global([data-theme="light"]) .icon-moon { display: block; }
+  :global([data-theme="dark"]) .icon-moon { display: none; }
+  :global([data-theme="dark"]) .icon-sun { display: block; }
 
   /* Desktop: show full nav, hide mobile nav */
   .mobile-nav {

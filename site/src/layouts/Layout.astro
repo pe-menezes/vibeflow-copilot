@@ -17,14 +17,14 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site || 'https://vibeflow
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="color-scheme" content="dark light" />
+    <meta name="color-scheme" content="light dark" />
 
     <!-- Theme init (blocking — prevents FOIT) -->
     <script is:inline>
       (function() {
         const saved = localStorage.getItem('theme');
-        if (saved) {
-          document.documentElement.dataset.theme = saved;
+        if (saved === 'dark') {
+          document.documentElement.dataset.theme = 'dark';
         }
       })();
     </script>
