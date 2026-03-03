@@ -80,6 +80,24 @@ Determine:
 DO NOT assume monorepo, Next.js, KMP, or any specific structure.
 Let the code tell you what it is.
 
+**Domain classification:** Based on what was detected, classify the project into one of:
+- **mobile** — Android, iOS, KMP, Flutter, React Native
+- **web-frontend** — React, Vue, Angular, Svelte, Next.js, Nuxt
+- **api-backend** — REST API, GraphQL, gRPC, microservices
+- **library** — reusable library/SDK
+- **cli** — command-line tool
+- **other** — anything else
+
+Based on the domain, activate **mandatory pattern priorities** (used in Phase 2 and 3):
+
+**Mobile:** design-system/UI-components (REQUIRED), screen/feature-composition (REQUIRED), navigation (REQUIRED), state-management, networking/API-layer, DI, analytics, feature-flags, i18n
+
+**Web frontend:** design-system/component-library (REQUIRED), page/route-composition (REQUIRED), state-management (REQUIRED), API-layer, auth, i18n
+
+**API/backend:** route/endpoint-definition (REQUIRED), data-access/repository (REQUIRED), auth/middleware (REQUIRED), error-handling, DB-migrations, background-jobs
+
+**Library/CLI/other:** no mandatory patterns — use existing heuristics
+
 ## Phase 1.5: Rules Integration
 
 **Incremental mode:** Only re-extract rules from knowledge sources that changed. Merge with existing rules map (reuse unchanged rules). In fresh mode, proceed as described below.
@@ -102,9 +120,33 @@ Produce an internal map (not a final output file):
 
 **Heuristic for sampling:**
 - Detect modules/domains automatically: by directory, file prefix (e.g., `fin_*.py`, `task_*.js`), and mentions in rules from Phase 1.5
-- Read ≥2 files per detected module (prioritize: largest by line count, most imported by others, mentioned in rules)
-- Minimum 8 files total; no fixed ceiling
-- For repos with >100 source files: explicitly document what was NOT covered in "Known Gaps" section of index.md
+
+**Sampling scale** (based on estimated total source files):
+
+| Source files | Min files to sample | Per module |
+|---|---|---|
+| ≤50 | 8 | ≥2 |
+| 51–200 | 12 | ≥2 |
+| 201–1000 | 20 | ≥2 |
+| 1001–5000 | 30 | ≥3 |
+| 5001–20000 | 40 | ≥3 |
+| 20000+ | 50–60 | ≥3 |
+
+Prioritize: largest files by line count, most imported by others, mentioned in rules.
+For repos with >100 source files: explicitly document what was NOT covered in "Known Gaps" section of index.md.
+
+**Cross-module sampling** (for repos with 1000+ source files):
+Instead of sampling many files from a few modules, sample the SAME LAYER across multiple modules/features:
+- Pick 3–4 features and read the same layer (e.g., UI, data, navigation) from each
+- This reveals the real pattern by repetition, not by exception
+- Example: read the main screen composable from 4 different product features to find the UI pattern
+
+**Mandatory pattern verification:**
+After sampling, check the mandatory pattern list from Phase 1 domain classification.
+For each REQUIRED pattern not yet covered by sampling:
+- Actively search for files matching that domain (e.g., search for design system imports, screen composables, route definitions)
+- Sample 2–3 additional files specifically for that pattern
+- If truly absent from the codebase, document it as "Not found" rather than silently omitting
 
 Document (for all sampled files):
 - Naming conventions (files, functions, variables, types, components)
@@ -129,6 +171,11 @@ This is the most important phase. For each significant pattern you discover:
 - Identify the "right way" vs. deviations
 
 **Expand scope using rules map:** Consider modules/subsystems from the Phase 1.5 rules map, not just those found in Phase 2 sampling. If a rule mentions a module the sampling didn't cover (e.g., "fitness module" in rules but not sampled), read files from that module and decide if it deserves a pattern doc.
+
+**Cross-module pattern rule:** For pattern docs that document a horizontal layer
+(UI composition, data access, navigation, design system usage, state management),
+include examples from at least 3 different features/modules. This ensures the
+documented pattern is the real convention, not an outlier from a single feature.
 
 What counts as a "significant pattern" depends on the project. Examples:
 - API/route definitions and their structure
@@ -240,11 +287,12 @@ In fresh mode, proceed as described below.
 
 **Budget calculation:** Count the total number of source files sampled/detected
 in Phase 2. Suggest a budget of ~2-3% of total source files, clamped between
-a minimum of 4 and a maximum of 10:
+a minimum of 4 and a maximum of 12:
 - ≤50 files → budget ≤ 4
-- 51-150 files → budget ≤ 6
-- 151-300 files → budget ≤ 8
-- 300+ files → budget ≤ 10
+- 51–150 files → budget ≤ 6
+- 151–500 files → budget ≤ 8
+- 501–2000 files → budget ≤ 10
+- 2000+ files → budget ≤ 12
 
 Write the result as `> Suggested budget: ≤ N files per task` in the
 index.md header. This is used by gen-spec and prompt-pack as the default budget.

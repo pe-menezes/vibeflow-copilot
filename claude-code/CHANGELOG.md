@@ -1,5 +1,14 @@
 # Changelog
 
+### v1.1.0 (2026-03-03)
+
+- **Analyze: domain detection + mandatory patterns** — Phase 1 now classifies the project by domain (mobile, web-frontend, api-backend, library, cli) and activates a mandatory pattern checklist per domain. Mobile projects REQUIRE design-system, screen-composition, and navigation patterns; web frontends REQUIRE component-library, route-composition, and state-management; API/backends REQUIRE endpoint-definition, data-access, and auth/middleware.
+- **Analyze: progressive sampling scale** — Replaced fixed minimums ("≥2 per module, minimum 8 total") with a 6-level scale based on repo size: 8 → 12 → 20 → 30 → 40 → 50-60 files. Large repos (1000+ files) now get cross-module sampling: same layer sampled across 3-4 features to find the real pattern by repetition.
+- **Analyze: mandatory pattern verification** — After sampling, REQUIRED patterns not covered trigger additional targeted sampling (2-3 files per missing pattern). Truly absent patterns are documented as "Not found" instead of silently omitted.
+- **Analyze: cross-module pattern rule** — Horizontal pattern docs (UI, data, navigation, design system) must include examples from ≥3 features/modules.
+- **Analyze: updated budget** — Max budget raised from 10 to 12 for repos with 2000+ source files. Mid-range adjusted (151-500 → ≤8, 501-2000 → ≤10).
+- All 3 editions (copilot, cursor, claude-code) updated in sync.
+
 ### v1.0.0 (2026-03-01)
 
 - **Stable release.** All 8 planned improvements implemented and verified.
