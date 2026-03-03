@@ -40,7 +40,7 @@ Veja [`copilot/README.md`](copilot/README.md) para instruções de instalação.
 
 Ou, se preferir, use o instalador automático (experimental):
 ```bash
-npx create-vibeflow@latest
+npx setup-vibeflow@latest
 ```
 
 ## Manual

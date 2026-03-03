@@ -84,7 +84,7 @@ Se preferir, use o instalador automático. Ele copia os arquivos, cria
 diretórios, e faz append no AGENTS.md e copilot-instructions.md automaticamente:
 
 ```bash
-npx create-vibeflow@latest
+npx setup-vibeflow@latest
 ```
 
 ## Após a instalação

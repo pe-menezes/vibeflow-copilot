@@ -1,9 +1,9 @@
 {
-  "name": "create-vibeflow",
+  "name": "setup-vibeflow",
   "version": "0.1.0",
   "description": "Install Vibeflow (spec-driven development) in your project",
   "bin": {
-    "create-vibeflow": "./index.js"
+    "setup-vibeflow": "./index.js"
   },
   "type": "module",
   "engines": {
