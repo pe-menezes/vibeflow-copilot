@@ -3,6 +3,7 @@ name: 'vibeflow-architect'
 description: 'Senior software architect and technical PM. Plans features, reviews specs, audits implementations. Does NOT write code.'
 tools:
   - 'read'
+  - 'edit'
   - 'search'
   - 'web'
   - 'execute'
