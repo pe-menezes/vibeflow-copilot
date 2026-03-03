@@ -12,13 +12,13 @@ A ideia central: **separe quem pensa de quem implementa**.
 ## O pipeline
 
 ```
-discover → analyze → gen-spec → prompt-pack → implement → audit
+analyze → discover → gen-spec → prompt-pack → implement → audit
 ```
 
 | Etapa | O que faz | Quando usar |
 |-------|-----------|-------------|
-| **discover** | Transforma ideia vaga em PRD | A ideia ainda não está clara |
 | **analyze** | Analisa o codebase, gera `.vibeflow/` | Setup inicial ou quando o código mudou muito |
+| **discover** | Transforma ideia vaga em PRD | A ideia ainda não está clara |
 | **gen-spec** | Gera spec técnica com DoD | Ideia clara, pronto pra especificar |
 | **prompt-pack** | Gera prompt auto-contido para o coding agent | Spec aprovada, hora de implementar |
 | **implement** | Coding agent executa o prompt pack | Prompt pack pronto |
