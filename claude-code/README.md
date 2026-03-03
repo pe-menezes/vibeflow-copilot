@@ -71,7 +71,7 @@ In the Cowork desktop app:
 |---------|-------------|
 | `/vibeflow:discover <idea>` | Interactive dialogue to turn a vague idea into a PRD |
 | `/vibeflow:quick <description>` | Fast-track: generates prompt pack directly for small tasks (≤4 files) |
-| `/vibeflow:analyze` | Deep-analyze the codebase, build pattern docs in `.vibeflow/` |
+| `/vibeflow:analyze [--fresh] [--scope <path>]` | Deep-analyze the codebase, build pattern docs in `.vibeflow/` |
 | `/vibeflow:gen-spec <feature>` | Generate a spec with DoD, scope, anti-scope, applicable patterns |
 | `/vibeflow:prompt-pack <spec>` | Generate a self-contained prompt pack with embedded patterns |
 | `/vibeflow:audit <spec>` | Audit implementation against DoD + patterns + tests |

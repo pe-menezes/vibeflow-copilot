@@ -53,6 +53,7 @@ Faz um deep scan do codebase e gera a pasta `.vibeflow/` com a documentação do
 - Primeira vez no projeto (setup obrigatório)
 - Depois de mudanças grandes no código
 - Com `--fresh` para reconstruir do zero
+- Com `--scope <path>` para deep-dive num módulo/diretório específico
 
 **O que gera:**
 ```
@@ -64,6 +65,8 @@ Faz um deep scan do codebase e gera a pasta `.vibeflow/` com a documentação do
 ```
 
 **Modo incremental:** Se `.vibeflow/` já existe, detecta mudanças via git e atualiza só o que mudou.
+
+**Modo scoped (`--scope`):** Deep-dive num módulo específico. Requer que o analyze geral já tenha rodado. Samplea densamente o módulo (80%+ dos arquivos) e enriquece os pattern docs globais com exemplos daquele módulo. Ideal para repos grandes onde o analyze geral é shallow em módulos individuais.
 
 ---
 

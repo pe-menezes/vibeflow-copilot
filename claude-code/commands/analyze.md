@@ -5,7 +5,7 @@ description: >
   documentation in .vibeflow/ that persists and can be committed to git.
   Supports incremental analysis: if .vibeflow/ already exists, detects
   changes via git and updates only affected modules.
-  Usage: /vibeflow:analyze [--fresh]
+  Usage: /vibeflow:analyze [--fresh] [--scope <path>]
 ---
 
 ## Language
@@ -24,12 +24,16 @@ real conventions.
 
 ## Phase 0: Detect Mode (Incremental vs Fresh)
 
-Check the current state to decide whether to run a fresh analysis or incremental update:
+Check the current state to decide which mode to run:
 - Does `.vibeflow/index.md` exist?
 - Is `--fresh` flag in `$ARGUMENTS`?
+- Is `--scope <path>` flag in `$ARGUMENTS`?
 - Is git available in this directory?
 
 **Decision tree:**
+- If `--scope <path>` flag present:
+  - If `.vibeflow/index.md` DOES NOT exist → STOP with: "Run `analyze` first to establish project context, then use `--scope` to deep-dive into specific modules."
+  - If `.vibeflow/index.md` EXISTS → enter **scoped mode** (see "Scoped Analysis Mode" section below). Skip Phases 1-5 entirely.
 - If `.vibeflow/` DOES NOT exist OR `--fresh` flag present → proceed with full analysis (Phases 1-5 as-is)
 - If `.vibeflow/` EXISTS AND no `--fresh` flag → enter incremental mode:
   1. Read `Analyzed: <date>` from `.vibeflow/index.md`
@@ -343,6 +347,79 @@ When you learn something new about this project, update:
 - .vibeflow/patterns/*.md if patterns evolve
 - This MEMORY.md index if new docs are added
 ```
+
+---
+
+## Scoped Analysis Mode (`--scope <path>`)
+
+This mode runs when the user passes `--scope <path>`. It is a **deep-dive into a specific module/directory**, complementing the general analysis. It requires `.vibeflow/index.md` to already exist.
+
+### Step 1: Inherit Global Context
+
+Read from the existing `.vibeflow/`:
+- `index.md` → stack, domain type, structural units, budget
+- `conventions.md` → global conventions
+- `patterns/*.md` → list of existing pattern docs
+
+This provides the context that the scoped analysis builds upon. Do NOT re-detect stack, domain type, or project structure.
+
+### Step 2: Scoped Discovery
+
+Focus discovery exclusively on the `<path>` directory:
+- Internal structure (subdirectories, file organization)
+- Internal dependencies (what the module imports from other modules in the project)
+- External dependencies (libraries used specifically by this module)
+- Entry points (main files, public APIs, exported components)
+- Any module-specific docs, READMEs, or config files
+
+### Step 3: Dense Sampling
+
+Sample the module **densely** — the goal is deep understanding, not broad coverage:
+- If the module has ≤30 source files → read ALL of them
+- If >30 source files → sample ≥80%, prioritizing: entry points, largest files, most imported files, files mentioned in rules
+- Apply the mandatory pattern priorities from the domain type (inherited from Step 1)
+- Document the same convention aspects as Phase 2 (naming, organization, imports, error handling, tests, state, typing, logging)
+
+### Step 4: Pattern Enrichment
+
+For each pattern discovered in the scoped module:
+
+**If a matching global pattern doc already exists** (e.g., `patterns/screen-composition.md`):
+- Add examples from this module to the existing doc, within the `<!-- vibeflow:auto:start/end -->` markers
+- Preserve all existing content outside markers
+- In the `## Where` section, add the scoped module as a location
+- In `## Examples from this codebase`, add 1-2 examples from the scoped module
+
+**If the pattern is specific to this module and no global doc covers it:**
+- Create a new pattern doc in `patterns/` following the standard structure with markers
+- Name it descriptively, optionally prefixed with the module name if it's truly module-specific (e.g., `payments-reconciliation.md`)
+
+**For conventions.md:**
+- If the module follows conventions that extend or specialize the global ones, add them within markers with attribution: "(via --scope `<path>`)"
+- If the module diverges from global conventions, flag it: "⚠️ Module `<path>` diverges: <description>"
+
+### Step 5: Update Index
+
+Add or update a `## Scoped Analyses` section in `index.md`:
+
+```markdown
+## Scoped Analyses
+- `<path>` — analyzed on <date>, N files sampled, M patterns enriched/created
+```
+
+Also update the `## Pattern Docs Available` section if new pattern docs were created.
+
+### After Scoped Analysis, Report to the User:
+
+- Module analyzed: `<path>`
+- Files sampled: N out of M total source files
+- Pattern docs **enriched** (existing docs that gained examples): list them
+- Pattern docs **created** (new module-specific patterns): list them
+- Module-specific conventions found (if any)
+- Divergences from global conventions (if any)
+- Suggest: "Run `gen-spec` or `prompt-pack` — the enriched patterns from `<path>` are now available."
+
+---
 
 ## After saving, report to the user:
 

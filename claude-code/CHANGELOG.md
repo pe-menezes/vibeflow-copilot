@@ -1,5 +1,10 @@
 # Changelog
 
+### v1.2.0 (2026-03-03)
+
+- **Analyze: `--scope <path>` flag** — Deep-dive into a specific module/directory. Requires a prior general analysis (`.vibeflow/` must exist). Inherits global context (stack, domain, conventions) and samples the target module densely (all files if ≤30, ≥80% if larger). Enriches existing global pattern docs with examples from the scoped module. Creates new pattern docs only for module-specific patterns not covered globally. Registers scoped analyses in `index.md`.
+- All 3 editions (copilot, cursor, claude-code) updated in sync.
+
 ### v1.1.0 (2026-03-03)
 
 - **Analyze: domain detection + mandatory patterns** — Phase 1 now classifies the project by domain (mobile, web-frontend, api-backend, library, cli) and activates a mandatory pattern checklist per domain. Mobile projects REQUIRE design-system, screen-composition, and navigation patterns; web frontends REQUIRE component-library, route-composition, and state-management; API/backends REQUIRE endpoint-definition, data-access, and auth/middleware.
