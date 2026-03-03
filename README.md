@@ -36,11 +36,12 @@ O source of truth dos arquivos Claude Code está em `claude-code/` neste repo.
 
 ### GitHub Copilot
 
+Veja [`copilot/README.md`](copilot/README.md) para instruções de instalação.
+
+Ou, se preferir, use o instalador automático (experimental):
 ```bash
 npx create-vibeflow@latest
 ```
-
-Ou instale manualmente — veja [`copilot/README.md`](copilot/README.md).
 
 ## Manual
 

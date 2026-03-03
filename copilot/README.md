@@ -32,20 +32,7 @@ Instructions ficam em subpasta `vibeflow/` (subdirectories suportados pelo Copil
 
 ## Instalação
 
-### Automática (recomendado)
-
-Na raiz do seu projeto:
-
-```bash
-npx create-vibeflow@latest
-```
-
-O CLI instala todos os arquivos, cria diretórios, e faz append automático no
-AGENTS.md e copilot-instructions.md (se já existirem).
-
-### Manual
-
-#### Repo novo (sem nada configurado)
+### Repo novo (sem nada configurado)
 
 ```bash
 # Na raiz do repo destino
@@ -90,6 +77,15 @@ Se não existe, copie direto (removendo a nota do topo).
 | `.github/skills/vibeflow-spec-driven-dev/` | Não | Copia direto (diretório dedicado) |
 | `.github/copilot-instructions.md` | Talvez | Append opcional |
 | `AGENTS.md` | **Sim** | Append ao existente |
+
+### Instalação automática (experimental)
+
+Se preferir, use o instalador automático. Ele copia os arquivos, cria
+diretórios, e faz append no AGENTS.md e copilot-instructions.md automaticamente:
+
+```bash
+npx create-vibeflow@latest
+```
 
 ## Após a instalação
 
