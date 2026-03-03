@@ -1,0 +1,44 @@
+name: Sync claude-code → vibeflow-claude
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'claude-code/**'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout vibeflow (source)
+        uses: actions/checkout@v4
+        with:
+          path: vibeflow
+
+      - name: Checkout vibeflow-claude (target)
+        uses: actions/checkout@v4
+        with:
+          repository: pe-menezes/vibeflow-claude
+          token: ${{ secrets.VIBEFLOW_CLAUDE_PAT }}
+          path: vibeflow-claude
+
+      - name: Sync files
+        run: |
+          # Remove old files (except .git)
+          find vibeflow-claude -maxdepth 1 -not -name '.git' -not -name '.' -exec rm -rf {} +
+
+          # Copy claude-code/ contents to vibeflow-claude root
+          cp -r vibeflow/claude-code/. vibeflow-claude/
+
+      - name: Commit and push
+        working-directory: vibeflow-claude
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to sync"
+          else
+            git commit -m "sync from vibeflow/claude-code @ ${{ github.sha }}"
+            git push
+          fi
