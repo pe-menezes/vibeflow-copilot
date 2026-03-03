@@ -25,7 +25,7 @@ jobs:
       - name: Sync files
         run: |
           # Remove old files (except .git)
-          find vibeflow-claude -maxdepth 1 -not -name '.git' -not -name '.' -exec rm -rf {} +
+          find vibeflow-claude -mindepth 1 -maxdepth 1 -not -name '.git' -exec rm -rf {} +
 
           # Copy claude-code/ contents to vibeflow-claude root
           cp -r vibeflow/claude-code/. vibeflow-claude/
