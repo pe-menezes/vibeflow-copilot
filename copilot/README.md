@@ -32,7 +32,20 @@ Instructions ficam em subpasta `vibeflow/` (subdirectories suportados pelo Copil
 
 ## Instalação
 
-### Repo novo (sem nada configurado)
+### Automática (recomendado)
+
+Na raiz do seu projeto:
+
+```bash
+npx create-vibeflow@latest
+```
+
+O CLI instala todos os arquivos, cria diretórios, e faz append automático no
+AGENTS.md e copilot-instructions.md (se já existirem).
+
+### Manual
+
+#### Repo novo (sem nada configurado)
 
 ```bash
 # Na raiz do repo destino
@@ -42,9 +55,9 @@ cp -r copilot/github/ .github/
 
 Remova a nota de instrução do topo do `AGENTS.md` (o bloco entre `>` e `---`).
 
-### Repo que JÁ tem AGENTS.md e/ou copilot-instructions.md
+#### Repo que JÁ tem AGENTS.md e/ou copilot-instructions.md
 
-#### Passo 1 — Copie os arquivos (seguro, não sobrescreve nada)
+**Passo 1 — Copie os arquivos (seguro, não sobrescreve nada)**
 
 ```bash
 cp -r copilot/github/instructions/ .github/instructions/
@@ -55,14 +68,14 @@ cp -r copilot/github/skills/vibeflow-spec-driven-dev/ .github/skills/
 
 Os arquivos Vibeflow usam prefixo `vibeflow-` nos nomes, então não conflitam com arquivos existentes.
 
-#### Passo 2 — copilot-instructions.md (opcional)
+**Passo 2 — copilot-instructions.md (opcional)**
 
 O Copilot carrega automaticamente os arquivos de `.github/instructions/`.
 O `vibeflow.instructions.md` que você copiou já será lido.
 
 Se quiser ser explícito, veja o snippet em `copilot-instructions.md` e adicione ao seu existente.
 
-#### Passo 3 — AGENTS.md
+**Passo 3 — AGENTS.md**
 
 Se já existe, faça append do conteúdo abaixo do `---` do `AGENTS.md` ao final do seu.
 Se não existe, copie direto (removendo a nota do topo).

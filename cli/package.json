@@ -1,0 +1,29 @@
+{
+  "name": "create-vibeflow",
+  "version": "0.1.0",
+  "description": "Install Vibeflow (spec-driven development) in your project",
+  "bin": {
+    "create-vibeflow": "./index.js"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "vibeflow",
+    "copilot",
+    "github-copilot",
+    "spec-driven",
+    "prompts",
+    "agents"
+  ],
+  "author": "pe-menezes",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pe-menezes/vibeflow"
+  },
+  "dependencies": {
+    "picocolors": "^1.1.0"
+  }
+}
