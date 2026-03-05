@@ -34,7 +34,7 @@ Vibeflow está disponível para 3 agentes. Escolha o seu:
 |--------|----------------------|
 | **GitHub Copilot** | `npx setup-vibeflow@latest --copilot` |
 | **Cursor** | `npx setup-vibeflow@latest --cursor` |
-| **Claude Code** | `/install-plugin pe-menezes/vibeflow` |
+| **Claude Code** | Add marketplace `pe-menezes/vibeflow-claude` (ou `/install-plugin pe-menezes/vibeflow-claude`) |
 
 Ou copie os arquivos manualmente — veja o README de cada edição:
 [`copilot/`](copilot/), [`cursor/`](cursor/), [`claude-code/`](claude-code/).
@@ -67,6 +67,18 @@ Faz um deep scan do codebase e gera a pasta `.vibeflow/` com a documentação do
 **Modo incremental:** Se `.vibeflow/` já existe, detecta mudanças via git e atualiza só o que mudou.
 
 **Modo scoped (`--scope`):** Deep-dive num módulo específico. Requer que o analyze geral já tenha rodado. Samplea densamente o módulo (80%+ dos arquivos) e enriquece os pattern docs globais com exemplos daquele módulo. Ideal para repos grandes onde o analyze geral é shallow em módulos individuais.
+
+---
+
+### `vibeflow-analyze-satellite`
+
+Analisa um **repositório satélite** (ex.: design system, lib compartilhada) sob a ótica do repo principal. Clona o repo em um diretório temporário, roda o mesmo pipeline de analyze no clone, detecta o que o repo principal **realmente usa** (imports e dependências declaradas), incorpora só esses patterns em `.vibeflow/` e remove o clone ao final.
+
+**Uso:** Um argumento obrigatório: URL do repo satélite (SSH ou HTTPS). Ex.: `vibeflow-analyze-satellite https://github.com/org/design-system`
+
+**Requisito:** O repo principal já deve ter `.vibeflow/` (rode `vibeflow-analyze` antes).
+
+**Provenance:** Todo conteúdo incorporado vai para `.vibeflow/patterns/satellite-<nome-repo>/`. Cada arquivo de pattern tem no topo uma nota em blockquote com o nome do satélite e a data de ingestão, para não confundir com patterns nativos do projeto.
 
 ---
 

@@ -155,6 +155,9 @@ export default {
   feat6Title: 'quick',
   feat6Desc: 'Fast-track for small tasks. Skips discovery, generates a prompt pack directly. For bug fixes and tasks under 4 files.',
   feat6For: 'For small tasks',
+  feat7Title: 'analyze-satellite',
+  feat7Desc: 'Analyzes a dependency repo (e.g. design system) from the main repo\'s perspective. Clones, analyzes, keeps only patterns the main repo uses, merges into .vibeflow/ with provenance, then removes the clone.',
+  feat7For: 'For enriching patterns from a dependency repo',
 
   // Editions
   editionsTitle: 'Choose your edition',
@@ -167,7 +170,7 @@ export default {
   cursorInstall: 'npx setup-vibeflow@latest --cursor',
   claudeTitle: 'Claude Code',
   claudeDesc: 'Plugin with slash commands for Claude Code CLI.',
-  claudeInstall: '/install-plugin pe-menezes/vibeflow',
+  claudeInstall: 'pe-menezes/vibeflow-claude',
   editionsGitDisclaimer: 'By default the installer adds installed files and the .vibeflow/ folder to .gitignore so they are not committed. Remove the "Vibeflow" block from .gitignore if you want to track them in git.',
   copied: 'Copied!',
   copyLabel: 'Copy',

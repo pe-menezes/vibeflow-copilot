@@ -70,6 +70,7 @@ In the Cowork desktop app:
 | Command | Description |
 |---------|-------------|
 | `/vibeflow:analyze [--fresh] [--scope <path>]` | Deep-analyze the codebase, build pattern docs in `.vibeflow/` |
+| `/vibeflow:analyze-satellite <url>` | Analyze a satellite repo (e.g. design system), filter by main repo usage, merge into `.vibeflow/patterns/satellite-<name>/` with provenance |
 | `/vibeflow:discover <idea>` | Interactive dialogue to turn a vague idea into a PRD |
 | `/vibeflow:quick <description>` | Fast-track: generates prompt pack directly for small tasks (≤4 files) |
 | `/vibeflow:gen-spec <feature>` | Generate a spec with DoD, scope, anti-scope, applicable patterns |
