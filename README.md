@@ -1,65 +1,75 @@
 # Vibeflow
 
-**Spec-driven development** — defina o que construir antes de codar.
+[![npm version](https://img.shields.io/npm/v/setup-vibeflow)](https://www.npmjs.com/package/setup-vibeflow)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Vibeflow separa quem pensa de quem implementa. O Architect (você + IA) define specs, toma decisões e corta escopo. O Coding Agent recebe um prompt pack auto-contido e implementa seguindo os padrões reais do projeto.
+**Spec-driven development** — define what to build before you code.
 
-## O pipeline
+Vibeflow separates the thinker from the implementer. The Architect (you + AI) defines specs, makes decisions, and cuts scope. The Coding Agent receives a self-contained prompt pack and implements following the project's real patterns.
+
+## The pipeline
 
 ```
-discover → analyze → gen-spec → prompt-pack → implement → audit
+analyze → discover → gen-spec → prompt-pack → implement → audit
 ```
 
-## Edições disponíveis
+| Step | What it does | When to use |
+|------|-------------|-------------|
+| **analyze** | Deep-scans the codebase, generates `.vibeflow/` | Initial setup or after major code changes |
+| **discover** | Turns a vague idea into a PRD | The idea isn't clear yet |
+| **gen-spec** | Generates a spec with binary DoD | Idea is clear, ready to specify |
+| **prompt-pack** | Creates a self-contained prompt for the coding agent | Spec approved, time to implement |
+| **implement** | Coding agent executes the prompt pack | Prompt pack ready |
+| **audit** | Verifies DoD + patterns + tests | Implementation done, time to validate |
 
-| Edição | Pasta | Status |
-|--------|-------|--------|
-| **GitHub Copilot** | [`copilot/`](copilot/) | Disponível |
-| **Cursor** | [`cursor/`](cursor/) | Disponível |
-| **Claude Code** | [`claude-code/`](claude-code/) | Disponível |
+## Editions
 
-Cada edição adapta os mesmos prompts e metodologia ao formato do agente.
-O conteúdo da metodologia é o mesmo — o que muda é a estrutura de arquivos.
+| Edition | Folder | Install |
+|---------|--------|---------|
+| **GitHub Copilot** | [`copilot/`](copilot/) | `npx setup-vibeflow@latest --copilot` |
+| **Cursor** | [`cursor/`](cursor/) | `npx setup-vibeflow@latest --cursor` |
+| **Claude Code** | [`claude-code/`](claude-code/) | `pe-menezes/vibeflow-claude` |
 
-O instalador (Copilot e Cursor) adiciona por padrão os arquivos instalados e a pasta `.vibeflow/` ao `.gitignore`; remova esse bloco se quiser versioná-los no git.
+Each edition adapts the same prompts and methodology to the agent's format.
+The methodology content is the same — only the file structure changes.
 
 ### Claude Code
 
-O Claude Code usa um sistema de plugins baseado em git. O repo de distribuição
-(marketplace) é mantido separado:
+Claude Code uses a git-based plugin system. The distribution repo (marketplace) is maintained separately:
 
-**Repo de distribuição (marketplace):** [pe-menezes/vibeflow-claude](https://github.com/pe-menezes/vibeflow-claude) — sincronizado automaticamente a partir de `claude-code/` neste repo.
+**Distribution repo:** [pe-menezes/vibeflow-claude](https://github.com/pe-menezes/vibeflow-claude) — auto-synced from `claude-code/` in this repo.
 
-Instale via Claude Code (Add marketplace / CLI):
+Install via Claude Code CLI:
 ```
 pe-menezes/vibeflow-claude
 ```
-Ou: `/install-plugin pe-menezes/vibeflow-claude`
-
-O source of truth dos arquivos Claude Code está em `claude-code/` neste repo.
 
 ### Cursor
 
-Veja [`cursor/README.md`](cursor/README.md) para instruções de instalação.
+See [`cursor/README.md`](cursor/README.md) for installation instructions.
 
-Ou, se preferir, use o instalador automático (experimental):
+Or use the automatic installer:
 ```bash
 npx setup-vibeflow@latest --cursor
 ```
 
-Usa **Rules** (`.cursor/rules/*.mdc`) para guardrails always-on e persona do Architect,
-e **Skills** (`.cursor/skills/*/SKILL.md`) para cada comando do pipeline — invocáveis
-via `/skill-name` no Agent chat ou automaticamente por contexto.
-
 ### GitHub Copilot
 
-Veja [`copilot/README.md`](copilot/README.md) para instruções de instalação.
+See [`copilot/README.md`](copilot/README.md) for installation instructions.
 
-Ou, se preferir, use o instalador automático (experimental):
+Or use the automatic installer:
 ```bash
 npx setup-vibeflow@latest --copilot
 ```
 
-## Manual
+> By default the installer adds installed files and the `.vibeflow/` folder to `.gitignore`. Remove the "Vibeflow" block from `.gitignore` if you want to track them in git.
 
-Veja o [MANUAL.md](MANUAL.md) para a documentação completa de todos os comandos, fluxos e a metodologia.
+## Documentation
+
+- [MANUAL.md](MANUAL.md) — Full documentation of all commands, flows, and methodology (PT-BR)
+- [CHANGELOG.md](CHANGELOG.md) — Version history
+- [Website](https://vibeflow-copilot.vercel.app/en/) — Landing page with interactive examples
+
+## License
+
+[MIT](LICENSE)
