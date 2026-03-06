@@ -6,6 +6,16 @@ description: >
   Usage: /vibeflow:discover <idea or area>
 ---
 
+## Description and examples
+
+**What it does:** Runs a short discovery dialogue (1–5 rounds): you describe an idea, the agent asks clarifying questions, challenges scope, and produces a PRD in `.vibeflow/prds/<slug>.md`. Use when the idea is still vague; if it's already clear, you can go straight to gen-spec.
+
+**Examples:**
+- `/vibeflow:discover quero um fluxo de login por email e senha` — Starts dialogue; at the end you get a PRD and can run gen-spec on it.
+- `/vibeflow:discover feature de exportar relatório em PDF` — Same; the agent will ask about scope, audience, and success criteria.
+
+---
+
 ## Language
 
 Detect the language of the user's input ($ARGUMENTS or conversation).

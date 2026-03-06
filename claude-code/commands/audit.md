@@ -3,7 +3,17 @@ description: >
   Audit recent work against its Definition of Done AND project patterns.
   Compares the current state of the code against the spec/DoD and verifies
   the implementation follows conventions from .vibeflow/.
-  Usage: /vibeflow:audit <spec-file-or-feature>
+  Usage: /vibeflow:audit <spec file or feature>
+---
+
+## Description and examples
+
+**What it does:** Finds the spec (in `.vibeflow/specs/` or by path), checks each DoD item and pattern compliance, runs the project's test suite, and reports PASS / PARTIAL / FAIL. If tests fail, the result is FAIL regardless of DoD.
+
+**Examples:**
+- `/vibeflow:audit .vibeflow/specs/login-flow.md` — Audit implementation against the login-flow spec.
+- `/vibeflow:audit login-flow` — Same; the agent looks up the spec by feature name.
+
 ---
 
 ## Language

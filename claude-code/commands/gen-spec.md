@@ -3,7 +3,17 @@ description: >
   Generate a spec for a feature or task. Includes objective, DoD,
   scope, anti-scope, technical decisions, and risks. Grounded in
   the project's real patterns from .vibeflow/.
-  Usage: /vibeflow:gen-spec <feature description>
+  Usage: /vibeflow:gen-spec <feature description or PRD path>
+---
+
+## Description and examples
+
+**What it does:** Produces a technical spec in `.vibeflow/specs/<slug>.md` with objective, Definition of Done (3–7 binary checks), scope, anti-scope, technical decisions, and applicable patterns. Reads `.vibeflow/` to ground the spec in your project. Can take a PRD path (from discover) or a short feature description.
+
+**Examples:**
+- `/vibeflow:gen-spec .vibeflow/prds/login-flow.md` — Generate spec from an existing PRD.
+- `/vibeflow:gen-spec adicionar endpoint POST /auth/login que retorna JWT` — Generate spec from a one-line description (uses .vibeflow/ patterns).
+
 ---
 
 ## Language

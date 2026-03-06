@@ -5,6 +5,15 @@ description: >
   Usage: /vibeflow:stats
 ---
 
+## Description and examples
+
+**What it does:** Scans `.vibeflow/audits/`, aggregates verdicts (PASS/PARTIAL/FAIL), which patterns are most often violated, and which DoD checks fail most. Output is in the chat only (no file). Use after you have at least a few audits.
+
+**Examples:**
+- `/vibeflow:stats` — No arguments; reports summary of all audits in `.vibeflow/audits/`.
+
+---
+
 ## Language
 
 Detect the language of the user's conversation context.

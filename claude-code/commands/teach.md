@@ -6,6 +6,17 @@ description: >
   Usage: /vibeflow:teach <feedback>
 ---
 
+## Description and examples
+
+**What it does:** Updates `.vibeflow/` from natural language: corrects a pattern doc, adds a convention, records a decision, or documents a new pattern. Prefer corrections outside the auto-generated markers so they survive the next analyze.
+
+**Examples:**
+- `/vibeflow:teach sempre usar camelCase para variáveis de estado` — Adds or updates a convention.
+- `/vibeflow:teach o padrão de API mudou, agora validamos com zod` — Updates the relevant pattern or conventions.
+- `/vibeflow:teach decidimos usar Redis para cache, não in-memory` — Logs the decision (e.g. in decisions.md or conventions).
+
+---
+
 ## Language
 
 Detect the language of the user's input ($ARGUMENTS or conversation).

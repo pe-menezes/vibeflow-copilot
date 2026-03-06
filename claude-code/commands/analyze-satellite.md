@@ -7,6 +7,16 @@ description: >
   Usage: /vibeflow:analyze-satellite <satellite-repo-URL>
 ---
 
+## Description and examples
+
+**What it does:** Enriches your project's `.vibeflow/` with patterns from a dependency repo (e.g. design system). Clones the satellite, analyzes it, keeps only what your main repo actually uses, writes to `.vibeflow/patterns/satellite-<name>/` with clear provenance, then deletes the clone. Run from the **main** repo root; `.vibeflow/` must already exist (run `/vibeflow:analyze` first).
+
+**Examples:**
+- `/vibeflow:analyze-satellite https://github.com/org/design-system` — Analyze the design-system repo and merge only the patterns your code uses.
+- `/vibeflow:analyze-satellite git@github.com:org/shared-lib.git` — Same with SSH URL.
+
+---
+
 ## Language
 
 Detect the language of the user's conversation. Write all output in that language. Technical terms in English are acceptable.

@@ -4,7 +4,17 @@ description: >
   is designed for a coding agent (Claude Code, Cursor, Copilot) that
   has NO context beyond the prompt itself. Embeds real patterns from
   .vibeflow/ so the agent follows the project's conventions.
-  Usage: /vibeflow:prompt-pack <spec-file-or-feature>
+  Usage: /vibeflow:prompt-pack <spec file or feature>
+---
+
+## Description and examples
+
+**What it does:** Reads a spec from `.vibeflow/specs/` (or path), builds a single prompt that includes objective, DoD, anti-scope, and real code patterns. Saves to `.vibeflow/prompt-packs/<slug>.md`. Give that file to the coding agent so it implements without needing the rest of the repo context.
+
+**Examples:**
+- `/vibeflow:prompt-pack .vibeflow/specs/login-flow.md` — Generate prompt pack from the login-flow spec.
+- `/vibeflow:prompt-pack login-flow` — Same; agent finds the spec by name.
+
 ---
 
 ## Language

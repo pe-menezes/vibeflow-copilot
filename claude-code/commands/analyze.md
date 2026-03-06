@@ -8,6 +8,17 @@ description: >
   Usage: /vibeflow:analyze [--fresh] [--scope <path>]
 ---
 
+## Description and examples
+
+**What it does:** Scans the codebase and generates (or updates) `.vibeflow/`: index, conventions, and one pattern doc per significant pattern. Use once for project setup, then after big changes or to deep-dive into a module.
+
+**Examples:**
+- `/vibeflow:analyze` — First run or incremental (only re-analyzes what changed since last run).
+- `/vibeflow:analyze --fresh` — Rebuild everything from scratch; ignore existing `.vibeflow/`.
+- `/vibeflow:analyze --scope src/app` — Deep-dive into `src/app` only; requires `.vibeflow/` to already exist. Enriches pattern docs with examples from that module.
+
+---
+
 ## Language
 
 Detect the language of the user's conversation context.
