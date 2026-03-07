@@ -12,14 +12,14 @@ cursor/
 │   └── vibeflow-architect.mdc                    → .cursor/rules/ (agent-decided — persona)
 └── skills/
     ├── vibeflow-analyze/SKILL.md                 → .cursor/skills/ (deep-analyze codebase)
-    ├── vibeflow-discover/SKILL.md                → .cursor/skills/ (idea → PRD)
-    ├── vibeflow-gen-spec/SKILL.md                → .cursor/skills/ (PRD/feature → spec)
+    ├── vibeflow-gen-spec/SKILL.md                → .cursor/skills/ (feature/PRD → spec)
     ├── vibeflow-prompt-pack/SKILL.md             → .cursor/skills/ (spec → prompt pack)
     ├── vibeflow-audit/SKILL.md                   → .cursor/skills/ (verify DoD + patterns)
+    ├── vibeflow-discover/SKILL.md                → .cursor/skills/ (idea → PRD)
     ├── vibeflow-quick/SKILL.md                   → .cursor/skills/ (fast-track ≤4 files)
     ├── vibeflow-teach/SKILL.md                   → .cursor/skills/ (update .vibeflow/ knowledge)
     ├── vibeflow-stats/SKILL.md                   → .cursor/skills/ (audit statistics)
-    └── vibeflow-spec-driven-dev/SKILL.md         → .cursor/skills/ (methodology reference)
+    └── vibeflow-spec-driven-dev/SKILL.md         → .cursor/skills/ (methodology, auto-loaded)
 ```
 
 Todos os arquivos usam o prefixo `vibeflow-` para evitar conflitos com arquivos do projeto.
@@ -75,14 +75,19 @@ O Cursor detecta automaticamente qual skill é relevante baseado no contexto da 
 ### Invocação manual (slash commands)
 Digite `/` no Agent chat e busque pelo nome do skill:
 
-- `/vibeflow-analyze` — analisa o codebase e gera `.vibeflow/` (flags: `--fresh`, `--scope`, `--interactive`, `--satellite`)
-- `/vibeflow-discover` — transforma ideia em PRD
-- `/vibeflow-gen-spec` — gera spec com DoD
-- `/vibeflow-prompt-pack` — gera prompt pack para coding agent
-- `/vibeflow-audit` — audita implementação contra DoD
-- `/vibeflow-quick` — fast-track para tarefas pequenas
-- `/vibeflow-teach` — atualiza `.vibeflow/` com feedback
-- `/vibeflow-stats` — estatísticas de auditorias
+**Core:**
+- `/vibeflow-analyze` — analisa o codebase, gera `.vibeflow/` (flags: `--fresh`, `--scope`, `--interactive`, `--satellite`)
+- `/vibeflow-gen-spec` — gera spec com DoD, scope, anti-scope e patterns aplicáveis
+- `/vibeflow-prompt-pack` — gera prompt pack autocontido com patterns embarcados
+
+**Secundários:**
+- `/vibeflow-audit` — audita implementação contra DoD + patterns + testes (PASS / PARTIAL / FAIL)
+- `/vibeflow-discover` — diálogo interativo (1–5 rounds) para transformar ideia vaga em PRD
+
+**Utilitários:**
+- `/vibeflow-quick` — fast-track para tarefas pequenas (≤4 arquivos)
+- `/vibeflow-teach` — atualiza `.vibeflow/` com correções, convenções ou decisões
+- `/vibeflow-stats` — estatísticas de auditorias: taxas, violações, tendências
 
 ### Rules
 

@@ -14,14 +14,14 @@ copilot/
     ├── agents/
     │   └── vibeflow-architect.agent.md           → persona do Architect
     ├── prompts/
-    │   ├── vibeflow-analyze.prompt.md
-    │   ├── vibeflow-audit.prompt.md
-    │   ├── vibeflow-discover.prompt.md
-    │   ├── vibeflow-gen-spec.prompt.md
-    │   ├── vibeflow-prompt-pack.prompt.md
-    │   ├── vibeflow-quick.prompt.md
-    │   ├── vibeflow-stats.prompt.md
-    │   └── vibeflow-teach.prompt.md
+    │   ├── vibeflow-analyze.prompt.md        (core: deep-analyze codebase)
+    │   ├── vibeflow-gen-spec.prompt.md       (core: feature/PRD → spec)
+    │   ├── vibeflow-audit.prompt.md          (secondary: verify DoD + patterns)
+    │   ├── vibeflow-discover.prompt.md       (secondary: idea → PRD)
+    │   ├── vibeflow-prompt-pack.prompt.md    (secondary: spec → prompt pack)
+    │   ├── vibeflow-quick.prompt.md          (utility: fast-track ≤4 files)
+    │   ├── vibeflow-teach.prompt.md          (utility: update .vibeflow/)
+    │   └── vibeflow-stats.prompt.md          (utility: audit statistics)
     └── skills/
         └── vibeflow-spec-driven-dev/
             └── SKILL.md
