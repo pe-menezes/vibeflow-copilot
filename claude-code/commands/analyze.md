@@ -5,7 +5,7 @@ description: >
   documentation in .vibeflow/ that persists and can be committed to git.
   Supports incremental analysis: if .vibeflow/ already exists, detects
   changes via git and updates only affected modules.
-  Usage: /vibeflow:analyze [--fresh] [--scope <path>]
+  Usage: /vibeflow:analyze [--fresh] [--scope <path>] [--interactive]
 ---
 
 ## Description and examples
@@ -16,6 +16,8 @@ description: >
 - `/vibeflow:analyze` — First run or incremental (only re-analyzes what changed since last run).
 - `/vibeflow:analyze --fresh` — Rebuild everything from scratch; ignore existing `.vibeflow/`.
 - `/vibeflow:analyze --scope src/app` — Deep-dive into `src/app` only; requires `.vibeflow/` to already exist. Enriches pattern docs with examples from that module.
+- `/vibeflow:analyze --interactive` — Run analysis with interactive review: validate patterns, remove false positives, add tribal knowledge before saving.
+- `/vibeflow:analyze --fresh --interactive` — Full rebuild with interactive review.
 
 ---
 
@@ -39,7 +41,10 @@ Check the current state to decide which mode to run:
 - Does `.vibeflow/index.md` exist?
 - Is `--fresh` flag in `$ARGUMENTS`?
 - Is `--scope <path>` flag in `$ARGUMENTS`?
+- Is `--interactive` flag in `$ARGUMENTS`?
 - Is git available in this directory?
+
+**`--interactive` flag:** If present, activates Phase 3.5 (Review & Enrich) after Phase 3. Composes with all modes: fresh, incremental, and scoped. Does NOT change which phases run — it adds a review step before saving.
 
 **Decision tree:**
 - If `--scope <path>` flag present:
@@ -210,6 +215,7 @@ Each pattern doc must follow this structure with YAML frontmatter and markers to
 tags: [tag1, tag2, tag3]
 modules: [src/path1/, src/path2/]
 applies_to: [artifact-type1, artifact-type2]
+confidence: inferred
 ---
 # Pattern: <Name>
 
@@ -247,12 +253,51 @@ Mark them so future work doesn't replicate mistakes.
 - **`tags`**: 3-7 lowercase strings describing the domain/concepts this pattern covers. Derive from the pattern name, the "What" section content, and key concepts in "The Pattern" section. Avoid generic tags like `code`, `file`, `pattern`. Use specific domain tags like `auth`, `middleware`, `api-routes`, `state-management`, `navigation`, `design-system`, etc.
 - **`modules`**: List of directory paths (relative to repo root, ending in `/`) where this pattern manifests. Derive from the "Where" section and the file paths in "Examples from this codebase".
 - **`applies_to`**: List of artifact types this pattern governs. Use generic type names: `components`, `routes`, `handlers`, `middleware`, `hooks`, `models`, `services`, `screens`, `tests`, `configs`, `migrations`, `commands`, `interceptors`, `guards`, `resolvers`, `controllers`, etc.
+- **`confidence`**: `inferred` (default — pattern found by automated analysis) or `validated` (confirmed by human via `--interactive` or `/vibeflow:teach`). Set to `inferred` on creation. Changed to `validated` during Phase 3.5 interactive review.
 
 **Marker placement rule:** Wrap sections `## What`, `## Where`, `## The Pattern`, `## Rules`, and `## Examples from this codebase` with `<!-- vibeflow:auto:start/end -->` markers. The `## Anti-patterns` section should NOT be wrapped — it's a natural place for manual additions and evolution. The YAML frontmatter is also NOT wrapped — it lives outside markers so manual edits to tags (via `/vibeflow:teach`) survive incremental updates.
 
 CRITICAL: Include REAL code snippets from REAL files. Not pseudocode.
 Not "something like this". The actual code. This is what makes the
 patterns actionable for a coding agent.
+
+**`## Rationale` section:** When rationale is provided (via `--interactive` Phase 3.5 or `/vibeflow:teach`), add a `## Rationale` section between `<!-- vibeflow:auto:end -->` and `## Anti-patterns`. This section is OUTSIDE markers and survives incremental updates. Only create when rationale is actually provided — no empty placeholders.
+
+## Phase 3.5: Review & Enrich (interactive only)
+
+**This phase runs ONLY when `--interactive` flag is present.** Without the flag, skip directly to Phase 4.
+
+**Incremental + interactive:** Only present patterns that are NEW or CHANGED in this run. Patterns already having `confidence: validated` in their frontmatter that were NOT modified are already validated — skip them.
+
+Present the patterns found to the user in a compact summary:
+
+```
+## Patterns found (N):
+
+1. **<Name>** — <1-line description> (modules: <paths>)
+2. **<Name>** — <1-line description> (modules: <paths>)
+...
+
+### Questions:
+
+1. **False positives?** Any of these patterns exist in the code but are NOT
+   intentional conventions your team follows? (indicate by number)
+
+2. **Missing patterns?** Any conventions your team follows that didn't
+   show up in the analysis? (describe briefly)
+
+3. **Why?** For the most important patterns, why did your team adopt them?
+   (optional, but greatly enriches the docs)
+```
+
+**After the user responds, incorporate feedback:**
+
+- **False positives:** Do NOT create the pattern doc. If it's being phased out (not accidental), create the doc but set `confidence: deprecated` and explain in `## Anti-patterns`.
+- **Missing patterns:** Create a new pattern doc with `confidence: validated`. Note `source: team-reported` in `## What`. Mark examples as `<!-- TODO: find code examples -->`.
+- **Rationale ("why"):** Add a `## Rationale` section to the pattern doc (outside auto markers, before `## Anti-patterns`). Content: the user's explanation.
+- **Confirmed patterns:** For all patterns the user confirmed (explicitly or by not flagging): set `confidence: validated` in frontmatter.
+
+After incorporating feedback, proceed to Phase 4.
 
 ## Phase 4: Compile
 
@@ -440,6 +485,10 @@ For each pattern discovered in the scoped module:
 **For conventions.md:**
 - If the module follows conventions that extend or specialize the global ones, add them within markers with attribution: "(via --scope `<path>`)"
 - If the module diverges from global conventions, flag it: "⚠️ Module `<path>` diverges: <description>"
+
+### Step 4.5: Review & Enrich (interactive only)
+
+**Runs ONLY when `--interactive` flag is present.** Present only the patterns found/enriched in this scoped analysis. Follow the same format, questions, and feedback incorporation rules as Phase 3.5.
 
 ### Step 5: Update Index
 
