@@ -7,10 +7,20 @@
 
 Vibeflow separates the thinker from the implementer. The Architect (you + AI) defines specs, makes decisions, and cuts scope. The Coding Agent receives a self-contained prompt pack and implements following the project's real patterns.
 
-## The pipeline
+## Quick start (3 commands)
 
 ```
-analyze → discover → gen-spec → prompt-pack → implement → audit
+analyze              → scans your codebase, builds .vibeflow/ knowledge
+gen-spec "feature"   → generates spec with DoD, scope, patterns
+implement <spec>     → implements with guardrails (budget, DoD, tests)
+```
+
+That's it. Run `analyze` once, then `gen-spec` → `implement` for each feature.
+
+## The full pipeline
+
+```
+analyze → discover → gen-spec → (prompt-pack | implement) → audit
 ```
 
 | Step | What it does | When to use |
@@ -18,9 +28,11 @@ analyze → discover → gen-spec → prompt-pack → implement → audit
 | **analyze** | Deep-scans the codebase, generates `.vibeflow/` | Initial setup or after major code changes |
 | **discover** | Turns a vague idea into a PRD | The idea isn't clear yet |
 | **gen-spec** | Generates a spec with binary DoD | Idea is clear, ready to specify |
-| **prompt-pack** | Creates a self-contained prompt for the coding agent | Spec approved, time to implement |
-| **implement** | Coding agent executes the prompt pack | Prompt pack ready |
+| **implement** | Implements from spec with guardrails (budget, DoD, patterns) | Spec approved, agent has filesystem access |
+| **prompt-pack** | Creates a self-contained prompt for a coding agent | Spec approved, need to delegate to another agent/session |
 | **audit** | Verifies DoD + patterns + tests | Implementation done, time to validate |
+
+Plus utility commands: **quick** (fast-track for small tasks), **teach** (update knowledge), **stats** (audit statistics).
 
 ## Editions
 
