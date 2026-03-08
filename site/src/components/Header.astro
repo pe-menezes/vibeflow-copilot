@@ -13,8 +13,7 @@ const t = useTranslations(lang);
 <header class="header">
   <div class="container header-inner">
     <a href={`/${lang}/`} class="logo">
-      <img src="/vibeflow-mark.png" alt="" class="logo-mark" width="28" height="28" />
-      <span class="logo-text">Vibeflow</span>
+      <img src="/vibeflow-logo-horizontal.png" alt="Vibeflow" class="logo-img" height="28" />
     </a>
 
     <nav class="header-nav desktop-nav">
@@ -91,23 +90,15 @@ const t = useTranslations(lang);
   .logo {
     display: flex;
     align-items: center;
-    gap: 8px;
     text-decoration: none;
   }
   .logo:hover {
     opacity: 0.85;
   }
-  .logo-mark {
-    width: 28px;
+  .logo-img {
     height: 28px;
+    width: auto;
     object-fit: contain;
-    flex-shrink: 0;
-  }
-  .logo-text {
-    font-weight: 700;
-    font-size: 1.125rem;
-    color: var(--text-primary);
-    letter-spacing: -0.01em;
   }
 
   .header-nav {
