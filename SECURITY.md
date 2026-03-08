@@ -6,7 +6,7 @@ If you discover a security vulnerability in Vibeflow, please report it responsib
 
 **Do not open a public issue.**
 
-Instead, email **pedro@vibeflow.dev** with:
+Instead, email **pedromenezesrs@gmail.com** with:
 - A description of the vulnerability
 - Steps to reproduce
 - Potential impact
