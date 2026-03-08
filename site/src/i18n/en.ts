@@ -11,10 +11,10 @@ export default {
   navCommands: 'Commands',
   navInstall: 'Install',
 
-  // Hero — aspirational
+  // Hero:aspirational
   heroTitle: 'Spec-driven development\nfor AI agents',
-  heroSubtitle: 'Define what to build — then let the agent build it right.',
-  heroDescription: 'Vibeflow separates thinking from coding. You define specs with guardrails — the AI agent implements following your project\'s real patterns.',
+  heroSubtitle: 'Define what to build, then let the agent build it right.',
+  heroDescription: 'Vibeflow separates thinking from coding. You define specs with guardrails, and the AI agent implements following your project\'s real patterns.',
   heroCta: 'See how it works',
   heroInstall: 'Install now',
   heroQuickStartTitle: 'Quick start',
@@ -25,7 +25,7 @@ export default {
   heroQuickStart3Cmd: 'implement <spec>',
   heroQuickStart3Desc: 'implements with guardrails (budget, DoD, tests)',
 
-  // How it works — 3 core steps
+  // How it works:3 core steps
   howTitle: 'How Vibeflow works',
   howSubtitle: 'Three commands. From codebase analysis to audited implementation.',
   step1Title: 'analyze',
@@ -45,19 +45,19 @@ export default {
   demoYou: 'You',
   demoVibeflow: 'Vibeflow',
 
-  // Round 1 — User drops a vague idea
+  // Round 1:User drops a vague idea
   demoR1user: '"I need user authentication for my app"',
 
-  // Round 2 — Vibeflow challenges hard
+  // Round 2:Vibeflow challenges hard
   demoR2q1: 'What kind? OAuth, magic link, or email/password?',
   demoR2q2: 'Do you need password reset in v1? That\'s 3 extra files and email integration.',
   demoR2q3: 'Social login? That adds OAuth complexity you might not need yet.',
   demoR2user: '"Just email/password. No reset, no social. Keep it simple."',
 
-  // Round 3 — Vibeflow pushes back on scope
-  demoR3q1: 'You said "simple" — do you need email verification or just trust the input?',
+  // Round 3:Vibeflow pushes back on scope
+  demoR3q1: 'You said "simple". Do you need email verification or just trust the input?',
   demoR3q2: 'Rate limiting on login attempts? Without it, brute force is trivial.',
-  demoR3user: '"No email verification for v1. Yes to rate limiting — 5 attempts per minute."',
+  demoR3user: '"No email verification for v1. Yes to rate limiting, 5 attempts per minute."',
 
   // PRD output
   demoR4label: 'PRD generated',
@@ -65,7 +65,7 @@ export default {
   demoR4antiscope: 'Anti-scope: OAuth, password reset, social login, email verification',
   demoR4criteria: 'Success criteria: 4 binary checks',
 
-  // gen-spec output — detailed
+  // gen-spec output:detailed
   demoR5label: 'Spec generated',
   demoR5dod1: '☐ POST /auth/signup returns 201 + JWT',
   demoR5dod2: '☐ POST /auth/login returns 200 + JWT',
@@ -84,7 +84,7 @@ export default {
   uc1Flow: 'analyze → gen-spec → implement → audit',
   uc2Title: 'Quick bug fix with controlled scope',
   uc2Role: 'Developer',
-  uc2Desc: 'A date formatting bug in the dashboard. You use quick mode — it generates a focused spec in seconds. The agent fixes the bug, nothing else. Audit confirms the fix.',
+  uc2Desc: 'A date formatting bug in the dashboard. You use quick mode, it generates a focused spec in seconds. The agent fixes the bug, nothing else. Audit confirms the fix.',
   uc2Flow: 'quick → implement → audit',
   uc3Title: 'Defining requirements before handing off',
   uc3Role: 'Product Manager',
@@ -92,17 +92,17 @@ export default {
   uc3Flow: 'discover → hand off PRD to team',
   uc4Title: 'Onboarding a new developer',
   uc4Role: 'Tech Lead',
-  uc4Desc: 'New dev joins the team. Instead of reading 200 files, they run analyze — Vibeflow produces a comprehensive guide to the project: architecture, patterns, conventions, all with real code examples.',
+  uc4Desc: 'New dev joins the team. Instead of reading 200 files, they run analyze. Vibeflow produces a comprehensive guide to the project: architecture, patterns, conventions, all with real code examples.',
   uc4Flow: 'analyze → dev reads .vibeflow/',
 
-  // Features — tiered
+  // Features:tiered
   featuresTitle: 'All commands',
   featuresSubtitle: 'Core pipeline plus power tools for every workflow.',
   featSeeAll: 'See all commands →',
 
   // Core commands (tier 1)
   feat1Title: 'analyze',
-  feat1Desc: 'Deep-scans your codebase and produces documentation: stack, architecture, patterns, conventions — all with real code examples.',
+  feat1Desc: 'Deep-scans your codebase and produces documentation: stack, architecture, patterns, conventions, all with real code examples.',
   feat1For: 'Understand your codebase',
   feat1Highlights: ['--fresh', '--scope', '--satellite', '--interactive'],
   feat2Title: 'gen-spec',
@@ -174,7 +174,7 @@ export default {
 
   // ─── Commands page ───────────────────────────────────────────
   cmdPageTitle: 'All commands',
-  cmdPageSubtitle: 'Complete reference for every Vibeflow command — flags, modes, and outputs.',
+  cmdPageSubtitle: 'Complete reference for every Vibeflow command: flags, modes, and outputs.',
   cmdBackToHome: '← Back to home',
   cmdUsage: 'Usage',
   cmdFlags: 'Flags & modes',
@@ -185,80 +185,80 @@ export default {
   // analyze
   cmdAnalyzeDesc: 'Deep-scans your codebase and learns your patterns, conventions, and architecture. Generates curated documentation in .vibeflow/ that persists and can be committed to git.',
   cmdAnalyzeUsage: '/vibeflow:analyze [--fresh] [--scope <path>] [--interactive] [--satellite <url>]',
-  cmdAnalyzeFlagDefault: 'Incremental mode (default) — re-analyzes only files changed since last run via git diff.',
+  cmdAnalyzeFlagDefault: 'Incremental mode (default): re-analyzes only files changed since last run via git diff.',
   cmdAnalyzeFlagFresh: 'Full rebuild from scratch. Ignores existing .vibeflow/, re-analyzes everything.',
   cmdAnalyzeFlagScope: 'Deep-dive into a specific module or directory (80%+ of files). Enriches global patterns with module-specific examples.',
-  cmdAnalyzeFlagInteractive: 'Adds a review checkpoint — presents patterns found, asks about false positives and missing patterns before saving.',
+  cmdAnalyzeFlagInteractive: 'Adds a review checkpoint: presents patterns found, asks about false positives and missing patterns before saving.',
   cmdAnalyzeFlagSatellite: 'Analyzes an external dependency repo (design system, shared lib). Clones it, detects what your main repo uses, merges relevant patterns.',
   cmdAnalyzeOutput: '.vibeflow/index.md, conventions.md, patterns/, decisions.md',
 
   // discover
   cmdDiscoverDesc: 'Interactive dialogue that transforms a vague idea into a clear, actionable PRD. Challenges assumptions, cuts scope aggressively, and forces decisions.',
   cmdDiscoverUsage: '/vibeflow:discover <idea or area>',
-  cmdDiscoverModeQuick: 'Quick round — if your first response has total clarity (concrete problem, defined audience, closable scope), skips to 1–2 rounds then generates PRD.',
-  cmdDiscoverModeComplete: 'Complete flow — 3–5 discovery rounds with strategic questioning. Explores problem, audience, success criteria, scope, and trade-offs.',
+  cmdDiscoverModeQuick: 'Quick round: if your first response has total clarity (concrete problem, defined audience, closable scope), skips to 1–2 rounds then generates PRD.',
+  cmdDiscoverModeComplete: 'Complete flow: 3–5 discovery rounds with strategic questioning. Explores problem, audience, success criteria, scope, and trade-offs.',
   cmdDiscoverOutput: '.vibeflow/prds/<slug>.md',
 
   // gen-spec
   cmdGenSpecDesc: 'Generates a technical spec with binary Definition of Done (3–7 pass/fail checks), scope, anti-scope, technical decisions, and risks. Grounded in your project\'s real patterns.',
   cmdGenSpecUsage: '/vibeflow:gen-spec <feature description or PRD path>',
-  cmdGenSpecInputPrd: 'From PRD — pass a path to .vibeflow/prds/<slug>.md and it uses the PRD as basis for the spec.',
-  cmdGenSpecInputDirect: 'From description — describe the feature directly and it generates the spec from scratch.',
-  cmdGenSpecAutoSplit: 'Auto-split — if spec exceeds limits (>7 DoD checks or exceeds budget), automatically splits into numbered parts with dependency tracking.',
+  cmdGenSpecInputPrd: 'From PRD: pass a path to .vibeflow/prds/<slug>.md and it uses the PRD as basis for the spec.',
+  cmdGenSpecInputDirect: 'From description: describe the feature directly and it generates the spec from scratch.',
+  cmdGenSpecAutoSplit: 'Auto-split: if spec exceeds limits (>7 DoD checks or exceeds budget), automatically splits into numbered parts with dependency tracking.',
   cmdGenSpecOutput: '.vibeflow/specs/<slug>.md (or <slug>-part-N.md if split)',
 
   // implement
   cmdImplementDesc: 'Implements a feature from its spec with hard guardrails. Follows your patterns exactly, respects budget and anti-scope, runs tests, and self-verifies every DoD check.',
   cmdImplementUsage: '/vibeflow:implement <spec file or feature name>',
-  cmdImplementPhase1: 'Find & validate spec — locates spec, validates required sections, checks multi-part dependencies.',
-  cmdImplementPhase2: 'Extract guardrails — DoD, scope, anti-scope, budget, and technical decisions become hard rules.',
-  cmdImplementPhase3: 'Load context — reads conventions, applicable patterns, index.md. Uses Pattern Resolution for smart matching.',
-  cmdImplementPhase4: 'Plan — identifies target files, verifies budget, maps DoD to implementation steps.',
-  cmdImplementPhase5: 'Implement — executes following patterns exactly. Minimum change principle. No refactoring outside scope.',
-  cmdImplementPhase6: 'Run tests — auto-detects test runner (npm test, pytest, cargo test, etc.). Max 2 fix attempts.',
-  cmdImplementPhase7: 'Self-verify DoD — checks each DoD item with evidence. Reports overall status.',
+  cmdImplementPhase1: 'Find & validate spec: locates spec, validates required sections, checks multi-part dependencies.',
+  cmdImplementPhase2: 'Extract guardrails: DoD, scope, anti-scope, budget, and technical decisions become hard rules.',
+  cmdImplementPhase3: 'Load context: reads conventions, applicable patterns, index.md. Uses Pattern Resolution for smart matching.',
+  cmdImplementPhase4: 'Plan: identifies target files, verifies budget, maps DoD to implementation steps.',
+  cmdImplementPhase5: 'Implement: executes following patterns exactly. Minimum change principle. No refactoring outside scope.',
+  cmdImplementPhase6: 'Run tests: auto-detects test runner (npm test, pytest, cargo test, etc.). Max 2 fix attempts.',
+  cmdImplementPhase7: 'Self-verify DoD: checks each DoD item with evidence. Reports overall status.',
   cmdImplementOutput: 'Code changes within scope and budget, with DoD verification report.',
   cmdImplementNote: 'Claude Code only. Budget is a hard limit. Anti-scope is sacred.',
 
   // prompt-pack
-  cmdPromptPackDesc: 'Generates a self-contained prompt for a coding agent in a separate session. The agent receives everything it needs — patterns, conventions, file paths, test commands — with zero external context.',
+  cmdPromptPackDesc: 'Generates a self-contained prompt for a coding agent in a separate session. The agent receives everything it needs: patterns, conventions, file paths, test commands. Zero external context.',
   cmdPromptPackUsage: '/vibeflow:prompt-pack <spec file or feature>',
-  cmdPromptPackAgnostic: 'Agent-agnostic — works with Copilot, Cursor, Claude Code, or any coding agent.',
-  cmdPromptPackEmbedded: 'Embedded patterns — includes real code examples from your .vibeflow/patterns/ so the agent follows your conventions.',
-  cmdPromptPackValidation: 'Validation — rejects specs with >7 DoD checks or exceeding budget. Requires splitting first.',
+  cmdPromptPackAgnostic: 'Agent-agnostic: works with Copilot, Cursor, Claude Code, or any coding agent.',
+  cmdPromptPackEmbedded: 'Embedded patterns: includes real code examples from your .vibeflow/patterns/ so the agent follows your conventions.',
+  cmdPromptPackValidation: 'Validation: rejects specs with >7 DoD checks or exceeding budget. Requires splitting first.',
   cmdPromptPackOutput: '.vibeflow/prompt-packs/<slug>.md',
 
   // audit
   cmdAuditDesc: 'Audits implementation against the spec on two dimensions: DoD compliance (every check pass/fail with evidence) and pattern compliance (conventions followed or deviations noted).',
   cmdAuditUsage: '/vibeflow:audit <spec file or feature>',
-  cmdAuditVerdictPass: 'PASS — all DoD checks pass, patterns followed, tests pass.',
-  cmdAuditVerdictPartial: 'PARTIAL — some checks pass, gaps identified with specific details.',
-  cmdAuditVerdictFail: 'FAIL — DoD not met or tests failing. Tests fail = automatic FAIL regardless of other checks.',
-  cmdAuditIncremental: 'On PARTIAL or FAIL, generates an incremental prompt pack covering only the gaps — so you can fix without re-reading the full spec.',
+  cmdAuditVerdictPass: 'PASS: all DoD checks pass, patterns followed, tests pass.',
+  cmdAuditVerdictPartial: 'PARTIAL: some checks pass, gaps identified with specific details.',
+  cmdAuditVerdictFail: 'FAIL: DoD not met or tests failing. Tests fail = automatic FAIL regardless of other checks.',
+  cmdAuditIncremental: 'On PARTIAL or FAIL, generates an incremental prompt pack covering only the gaps, so you can fix without re-reading the full spec.',
   cmdAuditOutput: '.vibeflow/audits/<slug>-audit.md',
 
   // quick
   cmdQuickDesc: 'Fast-track for small, well-defined tasks. Skips discovery, generates an ephemeral spec in memory, and outputs a ready-to-use prompt pack in one command.',
   cmdQuickUsage: '/vibeflow:quick <task description>',
-  cmdQuickBudget: '≤4 files budget — tighter than the standard ≤6. If the task needs more, it warns you to use the full pipeline.',
-  cmdQuickEphemeral: 'Ephemeral spec — generated in memory only (not saved to disk). Goes straight to prompt pack.',
+  cmdQuickBudget: '≤4 files budget: tighter than the standard ≤6. If the task needs more, it warns you to use the full pipeline.',
+  cmdQuickEphemeral: 'Ephemeral spec: generated in memory only (not saved to disk). Goes straight to prompt pack.',
   cmdQuickWhen: 'Use for bug fixes, small features, quick changes. Skip if the idea is vague or architecturally significant.',
   cmdQuickOutput: '.vibeflow/prompt-packs/<slug>.md',
 
   // teach
   cmdTeachDesc: 'Updates the .vibeflow/ knowledge base with corrections, new conventions, architectural decisions, or new patterns based on natural language feedback.',
   cmdTeachUsage: '/vibeflow:teach <feedback>',
-  cmdTeachCat1: 'Pattern correction — updates an existing pattern doc with your correction. Survives incremental updates.',
-  cmdTeachCat2: 'New convention — adds to conventions.md (e.g., "we always use named exports").',
-  cmdTeachCat3: 'Architectural decision — adds to decisions.md with context and discarded alternatives.',
-  cmdTeachCat4: 'New pattern — creates a new .vibeflow/patterns/<name>.md file with standard structure.',
+  cmdTeachCat1: 'Pattern correction: updates an existing pattern doc with your correction. Survives incremental updates.',
+  cmdTeachCat2: 'New convention: adds to conventions.md (e.g., "we always use named exports").',
+  cmdTeachCat3: 'Architectural decision: adds to decisions.md with context and discarded alternatives.',
+  cmdTeachCat4: 'New pattern: creates a new .vibeflow/patterns/<name>.md file with standard structure.',
   cmdTeachOutput: 'Updates to .vibeflow/ docs (conventions.md, patterns/, decisions.md)',
 
   // stats
   cmdStatsDesc: 'Compiles statistics from all audit reports. Shows pass/fail rates, most violated patterns, common DoD gaps, and quality trend over time.',
   cmdStatsUsage: '/vibeflow:stats',
   cmdStatsMetrics: 'Verdicts breakdown (PASS/PARTIAL/FAIL percentages), DoD pass rate, top 3 most failing checks, top 3 most violated patterns.',
-  cmdStatsTrend: 'Quality trend — improving, stable, or degrading (requires ≥3 audits).',
+  cmdStatsTrend: 'Quality trend: improving, stable, or degrading (requires ≥3 audits).',
   cmdStatsOutput: 'Chat output only (read-only, no files modified).',
 
   // Footer
