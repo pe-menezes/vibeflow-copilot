@@ -45,6 +45,13 @@ Fast-track for small tasks (≤4 files): use the `vibeflow-quick` skill.
 - **Anti-scope is a guardrail.** What you won't do matters.
 - **Tests are mandatory.** If tests fail, the task is not done.
 
+## .vibeflow/ Access Rule
+
+The `.vibeflow/` directory is gitignored by default (installed projects).
+Search, grep, and glob tools in IDEs respect `.gitignore` and will NOT
+find files inside `.vibeflow/`. Always access `.vibeflow/` files by reading
+them directly via their file path — never use search to discover them.
+
 ## Language
 
 Respond in the same language as the user's input.

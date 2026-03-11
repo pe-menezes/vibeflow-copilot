@@ -5,6 +5,7 @@
 
 ---
 
+<!-- vibeflow:start -->
 ## Vibeflow Methodology
 
 This repository uses **Vibeflow** (spec-driven development).
@@ -78,3 +79,4 @@ Invoke via `/skill-name` in Cursor Agent chat:
 
 Respond in the same language as the user's input.
 Technical terms in English are acceptable.
+<!-- vibeflow:end -->

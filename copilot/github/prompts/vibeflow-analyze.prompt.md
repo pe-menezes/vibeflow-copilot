@@ -35,12 +35,18 @@ real conventions.
 ## Phase 0: Detect Mode (Incremental vs Fresh)
 
 Check the current state to decide which mode to run:
-- Does `.vibeflow/index.md` exist?
+- Does `.vibeflow/index.md` exist? **(read it directly by path — see access rule below)**
 - Did the user request `--fresh`?
 - Did the user request `--scope <path>`?
 - Did the user request `--interactive`?
 - Did the user request `--satellite <url>`?
 - Is git available in this directory?
+
+**⚠️ .vibeflow/ access rule:** The `.vibeflow/` directory is gitignored by default.
+Search and grep tools in IDEs respect `.gitignore` and will NOT find `.vibeflow/` files.
+To check if `.vibeflow/` exists, **read `.vibeflow/index.md` directly by its file path**.
+Do NOT use file search, grep, or glob to check for its existence — these will return
+empty results and cause a false "does not exist" conclusion.
 
 **`--interactive` flag:** If present, activates Phase 3.5 (Review & Enrich) after Phase 3. Composes with all modes: fresh, incremental, and scoped. Does NOT change which phases run — it adds a review step before saving.
 

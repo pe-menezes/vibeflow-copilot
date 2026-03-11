@@ -1,5 +1,13 @@
 # Changelog
 
+### v0.12.1 (2026-03-11)
+
+- **Fix: .vibeflow/ detection when gitignored** — `vibeflow-analyze` Phase 0 now explicitly reads `.vibeflow/index.md` by direct path instead of using search/grep, which respect `.gitignore` and fail silently. Added a generic guardrail to Copilot instructions and Cursor rules. Affects `claude-code/skills/analyze/SKILL.md`, `copilot/github/prompts/vibeflow-analyze.prompt.md`, `cursor/skills/vibeflow-analyze/SKILL.md`, `copilot/github/instructions/vibeflow/vibeflow.instructions.md`, `cursor/rules/vibeflow.mdc`.
+
+### v0.12.0 (2026-03-11)
+
+- **CLI: idempotent `--force` for AGENTS.md** — Running `npx setup-vibeflow --force` no longer duplicates the vibeflow block in `AGENTS.md` or `copilot-instructions.md`. The CLI now uses `<!-- vibeflow:start/end -->` delimiters to upsert the block in-place. Legacy installs without delimiters get a safe append + warning instead of silent duplication. Affects `cli/index.js`, `copilot/AGENTS.md`, `copilot/copilot-instructions.md`. Version bumped to 0.12.0.
+
 ### v0.11.0 (2026-03-11)
 
 - **`implement` ported to Copilot and Cursor editions** — Previously exclusive to Claude Code based on a false assumption that other editions lacked filesystem access. All 3 agents (Claude Code, Copilot, Cursor) have full filesystem access. `implement` is now available in all editions. CLI updated to install the new files. `prompt-pack` remains available as an alternative for delegating to a separate session/agent.
