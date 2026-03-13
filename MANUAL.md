@@ -278,6 +278,40 @@ Mostra estatísticas dos audits: taxa de pass/fail, padrões mais violados, gaps
 3. vibeflow-audit            # (opcional para tasks muito pequenas)
 ```
 
+### Investigação de bug
+
+O fluxo depende de quão bem definido o bug está:
+
+**Bug claro (sabe o que tá errado, cabe em ≤4 arquivos):**
+
+```
+1. vibeflow-quick "fix: <descrição do bug>"
+2. [implementar]
+3. vibeflow-audit            # (opcional)
+```
+
+**Bug com causa desconhecida (tem evidência mas não sabe a raiz):**
+
+```
+1. vibeflow-gen-spec "bug: <sintoma + evidência (logs, stack trace, passos de repro)>"
+2. vibeflow-implement        # Investiga e corrige
+   ou vibeflow-prompt-pack   # Delega para outro agente
+3. vibeflow-audit
+```
+
+O `gen-spec` aceita descrições de bug como input — não precisa de PRD. Mas **precisa de evidência**: logs, stack trace, ou passos de reprodução. Sem evidência, o gen-spec vai pedir antes de gerar a spec.
+
+**Bug vago ("tá lento", "às vezes falha", sem repro claro):**
+
+```
+1. vibeflow-discover "o sistema faz X quando deveria fazer Y"
+2. vibeflow-gen-spec         # PRD → Spec com DoD
+3. vibeflow-implement
+4. vibeflow-audit
+```
+
+Aqui sim usa discover — porque o problema ainda não tá claro. O discover vai forçar você a definir: o que exatamente falha, quando, pra quem, e qual é o critério de "resolvido".
+
 ### Audit falhou
 
 ```
