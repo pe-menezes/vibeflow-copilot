@@ -41,6 +41,7 @@ Plus utility commands: **quick** (fast-track for small tasks), **teach** (update
 | **GitHub Copilot** | [`copilot/`](copilot/) | `npx setup-vibeflow@latest --copilot` |
 | **Cursor** | [`cursor/`](cursor/) | `npx setup-vibeflow@latest --cursor` |
 | **Claude Code** | [`claude-code/`](claude-code/) | `pe-menezes/vibeflow-claude` |
+
 Each edition adapts the same prompts and methodology to the agent's format.
 The methodology content is the same — only the file structure changes.
 
