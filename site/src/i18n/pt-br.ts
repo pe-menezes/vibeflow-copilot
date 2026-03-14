@@ -247,13 +247,14 @@ export default {
   cmdQuickOutput: '.vibeflow/prompt-packs/<slug>.md',
 
   // teach
-  cmdTeachDesc: 'Atualiza a knowledge base do .vibeflow/ com correções, novas convenções, decisões arquiteturais ou padrões novos a partir de feedback em linguagem natural.',
-  cmdTeachUsage: '/vibeflow:teach <feedback>',
+  cmdTeachDesc: 'Atualiza a knowledge base do .vibeflow/ com correções, novas convenções, decisões arquiteturais ou padrões novos. Também importa padrões de repos externos via --from.',
+  cmdTeachUsage: '/vibeflow:teach <feedback> | --from <url|path> [--name alias]',
   cmdTeachCat1: 'Correção de padrão: atualiza um doc de padrão existente com sua correção. Sobrevive a updates incrementais.',
   cmdTeachCat2: 'Nova convenção: adiciona ao conventions.md (ex: "sempre usamos named exports").',
   cmdTeachCat3: 'Decisão arquitetural: adiciona ao decisions.md com contexto e alternativas descartadas.',
   cmdTeachCat4: 'Padrão novo: cria novo arquivo .vibeflow/patterns/<nome>.md com estrutura padrão.',
-  cmdTeachOutput: 'Atualizações em .vibeflow/ docs (conventions.md, patterns/, decisions.md)',
+  cmdTeachCat5: '--from <url|path>: importa padrões e convenções de um repo externo de referência (ex: padrões de time de plataforma, guidelines). Review interativo para escolher o que importar. Salva em .vibeflow/patterns/external-<nome>/.',
+  cmdTeachOutput: 'Atualizações em .vibeflow/ docs (conventions.md, patterns/, decisions.md, patterns/external-*/)',
 
   // stats
   cmdStatsDesc: 'Compila estatísticas de todos os relatórios de audit. Mostra taxas de pass/fail, padrões mais violados, gaps de DoD comuns e tendência de qualidade.',

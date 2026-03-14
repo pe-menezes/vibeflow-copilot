@@ -1,5 +1,9 @@
 # Changelog
 
+### v1.9.0 (2026-03-13)
+
+- **`teach --from`: import patterns from external repos** — New flag `--from <url|path>` on the `teach` command imports patterns and conventions from an external reference repo (e.g., a platform team's repo with skills, architecture docs, coding guidelines). Clones the repo (shallow, ephemeral), detects knowledge sources (skills, CLAUDE.md, docs/, knowledge/, .cursorrules, etc.), presents an interactive review, and saves selected patterns to `.vibeflow/patterns/external-<name>/` with provenance and `confidence: imported`. Supports local paths, `--name` alias, and re-import. All 3 editions updated. Site commands page updated.
+
 ### v0.12.1 (2026-03-11)
 
 - **Fix: .vibeflow/ detection when gitignored** — `vibeflow-analyze` Phase 0 now explicitly reads `.vibeflow/index.md` by direct path instead of using search/grep, which respect `.gitignore` and fail silently. Added a generic guardrail to Copilot instructions and Cursor rules. Affects `claude-code/skills/analyze/SKILL.md`, `copilot/github/prompts/vibeflow-analyze.prompt.md`, `cursor/skills/vibeflow-analyze/SKILL.md`, `copilot/github/instructions/vibeflow/vibeflow.instructions.md`, `cursor/rules/vibeflow.mdc`.

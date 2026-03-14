@@ -213,13 +213,14 @@ Audita a implementação contra o DoD da spec e os padrões do projeto. Roda os 
 
 ### `vibeflow-teach`
 
-Ensina o knowledge base. Atualiza `.vibeflow/` com correções, novas convenções, decisões ou padrões.
+Ensina o knowledge base. Atualiza `.vibeflow/` com correções, novas convenções, decisões ou padrões. Também importa padrões de repos externos via `--from`.
 
 **Quando usar:**
 - Encontrou um erro num pattern doc
 - Quer adicionar uma convenção do time
 - Precisa registrar uma decisão arquitetural
 - Descobriu um padrão novo
+- Quer importar padrões de um repo externo de referência (ex: repo de plataforma com skills, docs de arquitetura, guidelines)
 
 **Exemplos de input:**
 - "Sempre use camelCase para variáveis de estado"
@@ -227,6 +228,26 @@ Ensina o knowledge base. Atualiza `.vibeflow/` com correções, novas convençõ
 - "Decidimos usar Redis ao invés de in-memory cache"
 
 As correções manuais são salvas **fora** dos marcadores auto-gerados, então sobrevivem ao próximo `analyze`.
+
+**Flag `--from <url|path>`:** Importa padrões e convenções de um repositório externo de referência. Diferente do `--satellite` (que filtra pelo que o repo principal consome como dependência), o `--from` importa tudo que o dev selecionar — ideal para repos de convenções e padrões de time.
+
+```
+vibeflow-teach --from https://github.com/org/platform-patterns
+vibeflow-teach --from ./meu-repo-de-padroes
+vibeflow-teach --from https://github.com/org/repo --name plataforma
+```
+
+**Fluxo:**
+1. Clona o repo (ou usa path local)
+2. Detecta fontes de conhecimento (skills, CLAUDE.md, docs/, knowledge/, .cursorrules, etc.)
+3. Apresenta review interativo — você escolhe o que importar
+4. Salva em `.vibeflow/patterns/external-<nome>/` com provenance
+5. Convenções selecionadas são incorporadas em `conventions.md`
+6. Clone efêmero é removido ao final
+
+**Re-import:** Rodar `--from` de novo no mesmo repo sobrescreve os padrões com aviso.
+
+**`--name <alias>`:** Sobrescreve o nome auto-detectado do repo.
 
 ---
 

@@ -247,13 +247,14 @@ export default {
   cmdQuickOutput: '.vibeflow/prompt-packs/<slug>.md',
 
   // teach
-  cmdTeachDesc: 'Updates the .vibeflow/ knowledge base with corrections, new conventions, architectural decisions, or new patterns based on natural language feedback.',
-  cmdTeachUsage: '/vibeflow:teach <feedback>',
+  cmdTeachDesc: 'Updates the .vibeflow/ knowledge base with corrections, new conventions, architectural decisions, or new patterns. Also imports patterns from external repos via --from.',
+  cmdTeachUsage: '/vibeflow:teach <feedback> | --from <url|path> [--name alias]',
   cmdTeachCat1: 'Pattern correction: updates an existing pattern doc with your correction. Survives incremental updates.',
   cmdTeachCat2: 'New convention: adds to conventions.md (e.g., "we always use named exports").',
   cmdTeachCat3: 'Architectural decision: adds to decisions.md with context and discarded alternatives.',
   cmdTeachCat4: 'New pattern: creates a new .vibeflow/patterns/<name>.md file with standard structure.',
-  cmdTeachOutput: 'Updates to .vibeflow/ docs (conventions.md, patterns/, decisions.md)',
+  cmdTeachCat5: '--from <url|path>: imports patterns and conventions from an external reference repo (e.g., platform team patterns, coding guidelines). Interactive review lets you pick what to import. Saves to .vibeflow/patterns/external-<name>/.',
+  cmdTeachOutput: 'Updates to .vibeflow/ docs (conventions.md, patterns/, decisions.md, patterns/external-*/)',
 
   // stats
   cmdStatsDesc: 'Compiles statistics from all audit reports. Shows pass/fail rates, most violated patterns, common DoD gaps, and quality trend over time.',

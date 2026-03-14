@@ -2,22 +2,25 @@
 name: teach
 description: >
   Updates the project knowledge base (.vibeflow/) with corrections, new conventions,
-  architectural decisions, or new patterns based on natural language feedback. Edits
-  are placed outside auto-generated markers to survive incremental analyze runs. Use
-  to keep .vibeflow/ accurate as the project evolves.
-argument-hint: "<feedback>"
-allowed-tools: Read, Grep, Glob
+  architectural decisions, or new patterns based on natural language feedback. Also
+  imports patterns from external repos via --from <url|path>. Edits are placed outside
+  auto-generated markers to survive incremental analyze runs. Use to keep .vibeflow/
+  accurate as the project evolves.
+argument-hint: "<feedback> | --from <url|path> [--name alias]"
+allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 ---
 
 ## Description and examples
 
-**What it does:** Updates `.vibeflow/` from natural language: corrects a pattern doc, adds a convention, records a decision, or documents a new pattern. Prefer corrections outside the auto-generated markers so they survive the next analyze.
+**What it does:** Updates `.vibeflow/` from natural language: corrects a pattern doc, adds a convention, records a decision, or documents a new pattern. Also imports patterns and conventions from an external reference repo via `--from`. Prefer corrections outside the auto-generated markers so they survive the next analyze.
 
 **Examples:**
 - `/vibeflow:teach sempre usar camelCase para variáveis de estado` — Adds or updates a convention.
 - `/vibeflow:teach o padrão de API mudou, agora validamos com zod` — Updates the relevant pattern or conventions.
 - `/vibeflow:teach decidimos usar Redis para cache, não in-memory` — Logs the decision (e.g. in decisions.md or conventions).
+- `/vibeflow:teach --from https://github.com/org/platform-patterns` — Imports patterns from an external repo.
+- `/vibeflow:teach --from ./my-patterns --name platform` — Imports from a local path with a custom alias.
 
 ---
 
@@ -35,6 +38,157 @@ Process feedback and update project knowledge: $ARGUMENTS
    - **YES** → read `.vibeflow/index.md` for orientation.
    - **NO** → warn: "`.vibeflow/` does not exist. Run `/vibeflow:analyze`
      first to create the knowledge base." and STOP.
+
+2. **Check for `--from` flag.**
+   If `$ARGUMENTS` contains `--from`, go to **## Import from external repo**.
+   Otherwise, continue to **## Classify the feedback**.
+
+---
+
+## Import from external repo
+
+This flow imports patterns and conventions from an external reference repo
+(e.g., a platform team's repo with skills, architecture docs, coding guidelines).
+
+### Step 1: Parse arguments
+
+- Extract the `<url|path>` after `--from`.
+- If `--name <alias>` is present, use `<alias>` as the repo name.
+- Otherwise, auto-detect the name:
+  - URL: use the last path segment without `.git` (e.g., `https://github.com/org/platform-patterns.git` → `platform-patterns`)
+  - Local path: use the directory name (e.g., `./my-patterns` → `my-patterns`)
+
+### Step 2: Get the repo
+
+- **URL (contains `://` or starts with `git@`):**
+  1. Clone to a temp directory: `git clone --depth 1 <url> $TMPDIR/vibeflow-teach-$(date +%s)`
+  2. Set `$REPO_PATH` to the clone directory.
+  3. Mark for cleanup at the end.
+
+- **Local path:**
+  1. Verify the path exists and is a directory.
+  2. Set `$REPO_PATH` to the resolved absolute path.
+  3. No cleanup needed.
+
+### Step 3: Detect knowledge sources
+
+Scan `$REPO_PATH` for these knowledge sources (in order):
+
+| Source | Glob pattern |
+|--------|-------------|
+| Claude Code skills | `.claude/skills/*/SKILL.md` |
+| CLAUDE.md | `CLAUDE.md` |
+| Knowledge docs | `knowledge/**/*.md` |
+| Documentation | `docs/**/*.md` |
+| Cursor rules | `.cursorrules` |
+| Cursor rule files | `.cursor/rules/*.mdc` |
+| AGENTS.md | `AGENTS.md` |
+
+For each source found:
+1. Read the file.
+2. Extract a **title** (first `#` heading, or filename if no heading).
+3. Extract a **summary** (first 3-5 lines of meaningful content, or the
+   `description` from YAML frontmatter if present).
+4. Classify as `pattern` or `convention` based on content:
+   - If it describes architecture, module structure, code organization → `pattern`
+   - If it describes coding rules, naming, formatting, process → `convention`
+
+If NO sources are found: report "No knowledge sources found in `<repo>`."
+and STOP (after cleanup if cloned).
+
+### Step 4: Interactive review
+
+Present the findings to the user:
+
+```
+## Found N knowledge sources in <repo-name>
+
+### Patterns
+1. [SKILL] kmp-architecture — KMP module structure, layers, DI, navigation
+2. [SKILL] kmp-best-practices — XCFramework, build, logging, lint guidelines
+3. [DOC] docs/api-conventions.md — REST API naming and versioning rules
+
+### Conventions
+4. [CLAUDE.md] Coding standards — Import ordering, error handling patterns
+5. [CURSOR] .cursorrules — Cursor-specific coding rules
+
+Select which to import (comma-separated numbers, "all", or "none"):
+```
+
+Wait for the user's selection. If the user selects "none": report
+"No patterns imported." and STOP (after cleanup).
+
+### Step 5: Import selected patterns
+
+For each selected item:
+
+#### 5a. Pattern items → save to `patterns/external-<nome>/`
+
+Create directory `.vibeflow/patterns/external-<repo-name>/` if it doesn't exist.
+
+For each selected pattern, create a file:
+`.vibeflow/patterns/external-<repo-name>/<source-name>.md`
+
+Format:
+```markdown
+---
+tags: [external, <repo-name>]
+modules: []
+applies_to: []
+confidence: imported
+---
+# Pattern: <title>
+
+> Imported from: <repo-name> (<url or path>) on YYYY-MM-DD
+
+<full content of the source file>
+```
+
+If the file already exists (re-import):
+- Warn: "Previously imported, updating."
+- Overwrite with the new content.
+
+#### 5b. Convention items → append to `conventions.md`
+
+Read `.vibeflow/conventions.md`. Add a section OUTSIDE the
+`<!-- vibeflow:auto:start/end -->` markers:
+
+```markdown
+## External Conventions: <repo-name>
+
+> Imported from: <repo-name> (<url or path>) on YYYY-MM-DD
+
+<extracted convention content>
+```
+
+If an `## External Conventions: <repo-name>` section already exists,
+replace it with the updated content.
+
+### Step 6: Update index.md
+
+Add the new pattern directory to the "Pattern Docs Available" section
+in `.vibeflow/index.md`:
+
+```
+- `patterns/external-<repo-name>/` — Patterns imported from <repo-name> (YYYY-MM-DD)
+```
+
+### Step 7: Cleanup
+
+If a clone was created (URL source):
+- Run `rm -rf $REPO_PATH` to remove the temporary clone.
+- This MUST happen even if previous steps failed (use try/finally logic).
+
+### Step 8: Report
+
+Report to the user:
+- How many sources were found and how many were imported
+- Which files were created/updated
+- Where to find the imported patterns
+- Suggest: "Review the imported patterns in `.vibeflow/patterns/external-<repo-name>/`.
+  They are ready to be used by `gen-spec` and `implement`."
+
+---
 
 ## Classify the feedback
 
