@@ -37,6 +37,43 @@ Technical terms in English are acceptable regardless of the detected language.
      description/scope to identify relevant patterns. Load only the top 3-5
      matching pattern docs from `.vibeflow/patterns/`. If no Pattern Registry
      exists in index.md, fall back to reading all pattern docs.
+
+### PRD Validation Gate
+
+**Activation:** This gate runs ONLY when the input is a PRD — either a `.md`
+file path or a text input longer than 3 lines. If the input is a short
+description (≤ 3 lines), skip this gate entirely and proceed to step 2.
+
+After reading the PRD (step 0) and loading `.vibeflow/` context (step 1),
+run these 5 sanity checks before generating the spec:
+
+1. **Concrete problem?** — Does the PRD describe a specific, real pain point?
+   Or is it generic/vague ("improve the experience")?
+2. **Audience defined?** — Is the target user/persona clearly identified?
+   Or does it say "everyone" / leave it implicit?
+3. **Closable scope?** — Can you envision a v0 with a finite, bounded scope?
+   Or is the scope open-ended / too ambitious for one spec?
+4. **No conflict with .vibeflow/?** — Cross-reference the PRD's proposed
+   solution against `.vibeflow/conventions.md` and loaded patterns. Does it
+   conflict with existing architecture, naming conventions, or established
+   patterns? Does it duplicate something that already exists?
+5. **Technically viable in current stack?** — Based on `.vibeflow/index.md`
+   (stack, dependencies, structure), is the proposed solution feasible
+   without major stack changes?
+
+**If all 5 checks pass:** proceed silently to spec generation. No delay.
+
+**If any check fails:** STOP and ask the user up to 2 targeted questions
+about the failing checks. After the user responds, proceed with spec
+generation — do not loop or ask more questions.
+
+Example questions:
+- "The PRD mentions X but `.vibeflow/conventions.md` establishes Y. Which
+  should the spec follow?"
+- "The scope includes A, B, C, D, E — that's likely >7 DoD checks. Can we
+  cut to just A and B for v0?"
+- "Who is the primary user? The PRD doesn't specify."
+
 2. If `.vibeflow/` does NOT exist:
    - Warn the user: "No project analysis found. Run the vibeflow-analyze
      skill first for better results. Proceeding with direct code reading."
