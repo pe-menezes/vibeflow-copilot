@@ -18,17 +18,19 @@ export default {
   heroDescription: 'Vibeflow separa o pensar do codar. Você define specs com guardrails. O agente de IA implementa seguindo os padrões reais do seu projeto.',
   heroCta: 'Veja como funciona',
   heroInstall: 'Instalar agora',
-  heroQuickStartTitle: 'Quick start',
-  heroQuickStart1Cmd: 'analyze',
-  heroQuickStart1Desc: 'escaneia seu codebase, gera .vibeflow/ knowledge',
-  heroQuickStart2Cmd: 'gen-spec "feature"',
-  heroQuickStart2Desc: 'gera spec com DoD, escopo, padrões',
-  heroQuickStart3Cmd: 'implement <spec>',
-  heroQuickStart3Desc: 'implementa com guardrails (budget, DoD, testes)',
+  heroQuickStartTitle: 'vibeflow pipeline',
+  heroQuickStart1Cmd: '$ analyze',
+  heroQuickStart1Desc: '✓ 14 padrões · 8 convenções · .vibeflow/ pronto',
+  heroQuickStart2Cmd: '$ gen-spec "auth"',
+  heroQuickStart2Desc: '✓ 5 DoD checks · budget ≤4 arquivos · anti-escopo travado',
+  heroQuickStart3Cmd: '$ implement',
+  heroQuickStart3Desc: '✓ 3 arquivos alterados · testes passam · DoD auto-verificado',
+  heroQuickStart4Cmd: '$ audit',
+  heroQuickStart4Desc: 'PASS — todos checks verificados, padrões seguidos',
 
   // How it works: 3 core steps
   howTitle: 'Como o Vibeflow funciona',
-  howSubtitle: 'Três comandos. Da análise do codebase à implementação auditada.',
+  howSubtitle: 'Quatro comandos. Da análise do codebase à implementação auditada.',
   step1Title: 'analyze',
   step1Desc: 'Deep-scan do codebase e aprende seus padrões, convenções e arquitetura.',
   step1Output: 'Docs .vibeflow/ com convenções reais',
@@ -38,11 +40,14 @@ export default {
   step3Title: 'implement',
   step3Desc: 'Implementa a partir da spec seguindo seus padrões, dentro do budget, respeitando anti-escopo.',
   step3Output: 'Código dentro do escopo e budget',
-  howFootnote: 'Mais: discover, prompt-pack, audit, quick, teach, stats',
+  step4Title: 'audit',
+  step4Desc: 'Verifica cada DoD check com evidência, confirma compliance de padrões, roda testes. PASS, PARTIAL ou FAIL.',
+  step4Output: 'Relatório de audit com veredicto + fix incremental',
+  howFootnote: 'Mais: discover, prompt-pack, quick, teach, stats',
 
   // See it in action
   demoTitle: 'Veja na prática',
-  demoSubtitle: 'Veja o Vibeflow desafiar uma ideia vaga até virar uma spec fechada.',
+  demoSubtitle: 'De ideia vaga a implementação verificada. O pipeline completo num exemplo.',
   demoYou: 'Você',
   demoVibeflow: 'Vibeflow',
 
@@ -75,6 +80,23 @@ export default {
   demoR5budget: 'Budget: ≤4 arquivos',
   demoR5pattern: 'Patterns: segue estrutura controller/service existente em src/api/',
   demoR5antiscope: 'Anti-escopo enforced: SEM OAuth, SEM reset, SEM verificação, SEM social',
+
+  // implement step
+  demoR6label: 'implement',
+  demoR6file1: 'src/api/auth/auth.controller.ts',
+  demoR6file2: 'src/api/auth/auth.service.ts',
+  demoR6file3: 'src/api/auth/auth.middleware.ts',
+  demoR6status: '✓ 3 arquivos · testes passam · DoD auto-verificado',
+
+  // audit step
+  demoR7label: 'audit',
+  demoR7dod1: '✓ POST /auth/signup retorna 201 + JWT',
+  demoR7dod2: '✓ POST /auth/login retorna 200 + JWT',
+  demoR7dod3: '✓ Senhas com hash bcrypt, mín 8 chars',
+  demoR7dod4: '✓ Login rate-limited a 5 tentativas/min por IP',
+  demoR7patterns: '✓ Compliance de padrões: estrutura controller/service seguida',
+  demoR7verdict: 'PASS',
+  demoR7verdictDesc: 'Todos 4 DoD checks verificados com evidência. Pode shipar.',
 
   // Use cases
   useCasesTitle: 'Casos de uso',

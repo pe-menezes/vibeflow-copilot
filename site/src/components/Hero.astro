@@ -40,6 +40,11 @@ const t = useTranslations(lang);
           <span class="qs-arrow">&rarr;</span>
           <span class="qs-desc">{t.heroQuickStart3Desc}</span>
         </div>
+        <div class="qs-line qs-line-pass">
+          <span class="qs-cmd">{t.heroQuickStart4Cmd}</span>
+          <span class="qs-arrow">&rarr;</span>
+          <span class="qs-desc qs-pass">{t.heroQuickStart4Desc}</span>
+        </div>
       </div>
     </div>
 
@@ -176,6 +181,11 @@ const t = useTranslations(lang);
 
   .qs-desc {
     color: var(--text-secondary);
+  }
+
+  .qs-pass {
+    color: var(--success-light, #22c55e);
+    font-weight: 600;
   }
 
   .hero-actions {

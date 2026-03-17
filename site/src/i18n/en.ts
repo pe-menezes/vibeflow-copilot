@@ -18,17 +18,19 @@ export default {
   heroDescription: 'Vibeflow separates thinking from coding. You define specs with guardrails, and the AI agent implements following your project\'s real patterns.',
   heroCta: 'See how it works',
   heroInstall: 'Install now',
-  heroQuickStartTitle: 'Quick start',
-  heroQuickStart1Cmd: 'analyze',
-  heroQuickStart1Desc: 'scans your codebase, builds .vibeflow/ knowledge',
-  heroQuickStart2Cmd: 'gen-spec "feature"',
-  heroQuickStart2Desc: 'generates spec with DoD, scope, patterns',
-  heroQuickStart3Cmd: 'implement <spec>',
-  heroQuickStart3Desc: 'implements with guardrails (budget, DoD, tests)',
+  heroQuickStartTitle: 'vibeflow pipeline',
+  heroQuickStart1Cmd: '$ analyze',
+  heroQuickStart1Desc: '✓ 14 patterns · 8 conventions · .vibeflow/ ready',
+  heroQuickStart2Cmd: '$ gen-spec "auth"',
+  heroQuickStart2Desc: '✓ 5 DoD checks · budget ≤4 files · anti-scope locked',
+  heroQuickStart3Cmd: '$ implement',
+  heroQuickStart3Desc: '✓ 3 files changed · tests pass · DoD self-verified',
+  heroQuickStart4Cmd: '$ audit',
+  heroQuickStart4Desc: 'PASS — all checks verified, patterns followed',
 
   // How it works:3 core steps
   howTitle: 'How Vibeflow works',
-  howSubtitle: 'Three commands. From codebase analysis to audited implementation.',
+  howSubtitle: 'Four commands. From codebase analysis to audited implementation.',
   step1Title: 'analyze',
   step1Desc: 'Deep-scans your codebase and learns your patterns, conventions, and architecture.',
   step1Output: '.vibeflow/ docs with real conventions',
@@ -38,11 +40,14 @@ export default {
   step3Title: 'implement',
   step3Desc: 'Implements from the spec following your patterns, within budget, respecting anti-scope.',
   step3Output: 'Code within scope and budget',
-  howFootnote: 'Plus: discover, prompt-pack, audit, quick, teach, stats',
+  step4Title: 'audit',
+  step4Desc: 'Verifies every DoD check with evidence, confirms pattern compliance, runs tests. PASS, PARTIAL, or FAIL.',
+  step4Output: 'Audit report with verdict + incremental fix',
+  howFootnote: 'Plus: discover, prompt-pack, quick, teach, stats',
 
   // See it in action
   demoTitle: 'See it in action',
-  demoSubtitle: 'Watch Vibeflow challenge a vague idea into a tight spec.',
+  demoSubtitle: 'From vague idea to verified implementation. The full pipeline in one example.',
   demoYou: 'You',
   demoVibeflow: 'Vibeflow',
 
@@ -75,6 +80,23 @@ export default {
   demoR5budget: 'Budget: ≤4 files',
   demoR5pattern: 'Patterns: follows existing controller/service structure in src/api/',
   demoR5antiscope: 'Anti-scope enforced: NO OAuth, NO reset, NO verification, NO social',
+
+  // implement step
+  demoR6label: 'implement',
+  demoR6file1: 'src/api/auth/auth.controller.ts',
+  demoR6file2: 'src/api/auth/auth.service.ts',
+  demoR6file3: 'src/api/auth/auth.middleware.ts',
+  demoR6status: '✓ 3 files · tests pass · DoD self-verified',
+
+  // audit step
+  demoR7label: 'audit',
+  demoR7dod1: '✓ POST /auth/signup returns 201 + JWT',
+  demoR7dod2: '✓ POST /auth/login returns 200 + JWT',
+  demoR7dod3: '✓ Passwords hashed with bcrypt, min 8 chars',
+  demoR7dod4: '✓ Login rate-limited to 5 attempts/min per IP',
+  demoR7patterns: '✓ Pattern compliance: controller/service structure followed',
+  demoR7verdict: 'PASS',
+  demoR7verdictDesc: 'All 4 DoD checks verified with evidence. Ship it.',
 
   // Use cases
   useCasesTitle: 'Use cases',

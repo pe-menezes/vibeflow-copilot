@@ -22,7 +22,7 @@ const t = useTranslations(lang);
           <span class="dot dot-yellow"></span>
           <span class="dot dot-green"></span>
         </div>
-        <span class="terminal-title">vibeflow discover → gen-spec</span>
+        <span class="terminal-title">full pipeline: discover → gen-spec → implement → audit</span>
       </div>
 
       <div class="terminal-body">
@@ -93,7 +93,7 @@ const t = useTranslations(lang);
         </div>
 
         <!-- gen-spec output — detailed -->
-        <div class="demo-step demo-step-final">
+        <div class="demo-step">
           <div class="step-label">
             <span class="step-label-icon">03</span>
             <code>gen-spec</code>
@@ -113,6 +113,51 @@ const t = useTranslations(lang);
               <span class="spec-meta-line">{t.demoR5budget}</span>
               <span class="spec-meta-line">{t.demoR5pattern}</span>
               <span class="spec-meta-line spec-meta-danger">{t.demoR5antiscope}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- implement output -->
+        <div class="demo-step">
+          <div class="step-label">
+            <span class="step-label-icon">04</span>
+            <code>implement</code>
+          </div>
+          <div class="demo-output demo-output-impl">
+            <span class="output-badge output-badge-green">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              {t.demoR6label}
+            </span>
+            <div class="output-content impl-files">
+              <span class="output-line impl-file">{t.demoR6file1}</span>
+              <span class="output-line impl-file">{t.demoR6file2}</span>
+              <span class="output-line impl-file">{t.demoR6file3}</span>
+            </div>
+            <div class="impl-status">{t.demoR6status}</div>
+          </div>
+        </div>
+
+        <!-- audit output — the payoff -->
+        <div class="demo-step demo-step-final">
+          <div class="step-label">
+            <span class="step-label-icon">05</span>
+            <code>audit</code>
+          </div>
+          <div class="demo-output demo-output-audit">
+            <span class="output-badge output-badge-green">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              {t.demoR7label}
+            </span>
+            <div class="output-content dod-list">
+              <span class="output-line dod-pass">{t.demoR7dod1}</span>
+              <span class="output-line dod-pass">{t.demoR7dod2}</span>
+              <span class="output-line dod-pass">{t.demoR7dod3}</span>
+              <span class="output-line dod-pass">{t.demoR7dod4}</span>
+              <span class="output-line dod-pass">{t.demoR7patterns}</span>
+            </div>
+            <div class="audit-verdict">
+              <span class="verdict-badge">{t.demoR7verdict}</span>
+              <span class="verdict-desc">{t.demoR7verdictDesc}</span>
             </div>
           </div>
         </div>
@@ -327,6 +372,70 @@ const t = useTranslations(lang);
   .demo-output-spec {
     border-color: var(--accent-border, var(--border-inset));
     background: var(--accent-glow);
+  }
+
+  /* Implement output */
+  .demo-output-impl {
+    border-color: var(--border-inset);
+  }
+
+  .output-badge-green { color: var(--success-light, #22c55e); }
+
+  .impl-file {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+  }
+  .impl-file::before {
+    content: '  ';
+    margin-right: 4px;
+  }
+
+  .impl-status {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--success-light, #22c55e);
+    font-weight: 600;
+  }
+
+  /* Audit output */
+  .demo-output-audit {
+    border-color: var(--success-light, #22c55e);
+    background: rgba(34, 197, 94, 0.04);
+  }
+
+  .dod-pass {
+    color: var(--success-light, #22c55e);
+    font-weight: 500;
+  }
+
+  .audit-verdict {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .verdict-badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 4px;
+    background: var(--success-light, #22c55e);
+    color: #000;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .verdict-desc {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
   }
 
   @media (max-width: 768px) {

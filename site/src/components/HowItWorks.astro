@@ -13,6 +13,7 @@ const steps = [
   { title: t.step1Title, desc: t.step1Desc, output: t.step1Output, color: 'var(--purple)' },
   { title: t.step2Title, desc: t.step2Desc, output: t.step2Output, color: 'var(--accent-light)' },
   { title: t.step3Title, desc: t.step3Desc, output: t.step3Output, color: 'var(--success-light)' },
+  { title: t.step4Title, desc: t.step4Desc, output: t.step4Output, color: 'var(--warning-light, #eab308)' },
 ];
 ---
 
@@ -133,7 +134,7 @@ const steps = [
   /* Step Cards Grid */
   .steps-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 16px;
   }
 
