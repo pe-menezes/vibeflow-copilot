@@ -99,7 +99,7 @@ That's it. Run `analyze` once, then `gen-spec` → `implement` for each feature.
 | Command | Description |
 |---------|-------------|
 | `/vibeflow:quick <description>` | Fast-track: generates prompt pack directly for small tasks (≤4 files) |
-| `/vibeflow:teach <feedback>` | Updates `.vibeflow/` with corrections, conventions, or decisions |
+| `/vibeflow:teach <feedback>` | Updates `.vibeflow/` with corrections, conventions, or decisions. `--from <url\|path>` imports patterns from external repos |
 | `/vibeflow:stats` | Compiles audit statistics: pass rates, common violations, trends |
 
 ## How It Works
@@ -122,6 +122,7 @@ That's it. Run `analyze` once, then `gen-spec` → `implement` for each feature.
 **Shortcuts:**
 - `/vibeflow:quick "description"` → prompt pack directly (skips discover/spec)
 - `/vibeflow:analyze --satellite <url>` → analyze a dependency repo (e.g. design system)
+- `/vibeflow:teach --from <url>` → import patterns from an external conventions repo
 
 ## Project Knowledge (.vibeflow/)
 

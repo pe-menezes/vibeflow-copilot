@@ -253,7 +253,7 @@ export default {
   cmdTeachCat2: 'Nova convenção: adiciona ao conventions.md (ex: "sempre usamos named exports").',
   cmdTeachCat3: 'Decisão arquitetural: adiciona ao decisions.md com contexto e alternativas descartadas.',
   cmdTeachCat4: 'Padrão novo: cria novo arquivo .vibeflow/patterns/<nome>.md com estrutura padrão.',
-  cmdTeachCat5: '--from <url|path>: importa padrões e convenções de um repo externo de referência (ex: padrões de time de plataforma, guidelines). Review interativo para escolher o que importar. Salva em .vibeflow/patterns/external-<nome>/.',
+  cmdTeachCat5: '--from <url|path>: importa padrões e convenções de um repo externo de referência (ex: guidelines de arquitetura, convenções compartilhadas). Review interativo para escolher o que importar. Salva em .vibeflow/patterns/external-<nome>/.',
   cmdTeachOutput: 'Atualizações em .vibeflow/ docs (conventions.md, patterns/, decisions.md, patterns/external-*/)',
 
   // stats

@@ -48,7 +48,7 @@ Process feedback and update project knowledge: $ARGUMENTS
 ## Import from external repo
 
 This flow imports patterns and conventions from an external reference repo
-(e.g., a platform team's repo with skills, architecture docs, coding guidelines).
+(e.g., shared architecture docs, coding guidelines).
 
 ### Step 1: Parse arguments
 

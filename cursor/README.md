@@ -17,7 +17,7 @@ cursor/
     ├── vibeflow-audit/SKILL.md                   → .cursor/skills/ (verify DoD + patterns)
     ├── vibeflow-discover/SKILL.md                → .cursor/skills/ (idea → PRD)
     ├── vibeflow-quick/SKILL.md                   → .cursor/skills/ (fast-track ≤4 files)
-    ├── vibeflow-teach/SKILL.md                   → .cursor/skills/ (update .vibeflow/ knowledge)
+    ├── vibeflow-teach/SKILL.md                   → .cursor/skills/ (update .vibeflow/ + --from import)
     └── vibeflow-stats/SKILL.md                   → .cursor/skills/ (audit statistics)
 ```
 
@@ -86,7 +86,7 @@ Digite `/` no Agent chat e busque pelo nome do skill:
 
 **Utilitários:**
 - `/vibeflow-quick` — fast-track para tarefas pequenas (≤4 arquivos)
-- `/vibeflow-teach` — atualiza `.vibeflow/` com correções, convenções ou decisões
+- `/vibeflow-teach` — atualiza `.vibeflow/` com correções, convenções ou decisões. `--from <url|path>` importa padrões de repos externos
 - `/vibeflow-stats` — estatísticas de auditorias: taxas, violações, tendências
 
 ### Rules

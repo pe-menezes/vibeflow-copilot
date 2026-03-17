@@ -32,7 +32,7 @@ analyze → discover → gen-spec → (prompt-pack | implement) → audit
 | **prompt-pack** | Creates a self-contained prompt for a coding agent | Spec approved, need to delegate to another agent/session |
 | **audit** | Verifies DoD + patterns + tests | Implementation done, time to validate |
 
-Plus utility commands: **quick** (fast-track for small tasks), **teach** (update knowledge), **stats** (audit statistics).
+Plus utility commands: **quick** (fast-track for small tasks), **teach** (update knowledge base, import patterns from external repos via `--from`), **stats** (audit statistics).
 
 ## Editions
 

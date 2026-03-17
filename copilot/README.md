@@ -21,7 +21,7 @@ copilot/
     │   ├── vibeflow-discover.prompt.md       (secondary: idea → PRD)
     │   ├── vibeflow-prompt-pack.prompt.md    (secondary: spec → prompt pack)
     │   ├── vibeflow-quick.prompt.md          (utility: fast-track ≤4 files)
-    │   ├── vibeflow-teach.prompt.md          (utility: update .vibeflow/)
+    │   ├── vibeflow-teach.prompt.md          (utility: update .vibeflow/ + --from import)
     │   └── vibeflow-stats.prompt.md          (utility: audit statistics)
     └── skills/                                       → (reserved for future use)
 ```
