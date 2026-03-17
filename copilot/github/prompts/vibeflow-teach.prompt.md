@@ -230,6 +230,17 @@ The user is recording an architectural decision.
 
 ### (d) New pattern
 The user is describing a pattern that doesn't have a doc yet.
+
+**Conflict detection:** Before creating, check if a file with the same name
+already exists in `.vibeflow/patterns/` or `.vibeflow/patterns/external-*/`.
+- If it exists in `patterns/` (local): ask the user — "A pattern `<name>.md`
+  already exists. Update the existing one or create a new one?"
+  If update → treat as category (a) instead.
+- If it exists in `patterns/external-*/` (imported): warn the user — "An
+  imported pattern `<name>.md` exists from `<repo-name>`. Create a local
+  override or skip?" If skip → STOP.
+
+If no conflict, proceed:
 - Create a new file: `.vibeflow/patterns/<name>.md`
 - Use the standard structure with markers:
 

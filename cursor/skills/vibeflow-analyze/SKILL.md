@@ -181,6 +181,8 @@ Look for REPEATED patterns, not one-off occurrences.
 
 **Incremental mode:** Only re-analyze patterns for affected modules. For pattern docs being updated, preserve content outside `<!-- vibeflow:auto:start/end -->` markers — this includes the YAML frontmatter block at the top. **Frontmatter preservation rule:** If the pattern doc already has a `---` frontmatter block AND the content within `<!-- vibeflow:auto -->` markers did NOT change, keep the existing frontmatter untouched (the dev may have manually edited tags via `/vibeflow:teach`). If the auto content DID change, regenerate the frontmatter to reflect the updated content. For existing pattern docs without markers (legacy), rewrite them entirely with markers and frontmatter added. For new patterns, create with frontmatter and markers. In fresh mode, proceed as described below.
 
+**Imported pattern protection:** Before creating or updating a pattern doc, check if a pattern with the same name exists in `.vibeflow/patterns/external-*/` (imported via `teach --from`). If an imported version exists, **skip** that pattern — do not create or overwrite a local version. Imported patterns from an external source of truth take precedence over auto-discovered patterns. Log a note: "Skipping `<name>` — imported version exists in `external-<repo>/`."
+
 This is the most important phase. For each significant pattern you discover:
 - Read 3-5 examples of the pattern being used in the codebase
 - Extract the REAL pattern, not a theoretical one
